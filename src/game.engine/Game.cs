@@ -16,11 +16,12 @@ namespace Game.Engine
             Registery = new SystemRegistery();
             EventManager = new EventManager();
             EntityRegistery = new EntityRegistery();
+            EntityLoader = new EntityLoader(EntityRegistery);
         }
 
         public ISystemRegistery Registery { get; }
         public IEntityRegistery EntityRegistery { get; }
-
+        public EntityLoader EntityLoader { get; }
         public EventManager EventManager { get; }
 
         public void Run()

@@ -155,6 +155,11 @@ namespace Game.Engine.EntityComponentSystem
             Add(record, null);
         }
 
+        public IEnumerable<IComponent> GetComponents(IEntityRecord record)
+        {
+            return GetComponentsForRecord(record).Values;
+        }
+
         private IDictionary<Type, IComponent> GetComponentsForRecord(IEntityRecord record)
         {
             lock (_locker)

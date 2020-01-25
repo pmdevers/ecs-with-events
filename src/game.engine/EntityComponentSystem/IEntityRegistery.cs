@@ -23,5 +23,7 @@ namespace Game.Engine.EntityComponentSystem
         TComponent GetComponent<TComponent>(IEntityRecord entityRecord) where TComponent : class, IComponent;
 
         IEnumerable<T> GetComponentsOf<T>() where T : class, IComponent;
+        IEnumerable<IComponent> GetComponents(IEntityRecord record);
+
     }
 }

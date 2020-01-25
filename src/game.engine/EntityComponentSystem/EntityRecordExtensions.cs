@@ -7,6 +7,8 @@
             return record.Registery.GetComponent<TComponent>(record);
         }
 
+        
+
         public static bool AddComponent(this IEntityRecord record, IComponent component)
         {
             return record.Registery.Add(record, component);

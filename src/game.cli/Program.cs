@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Game.Engine.EntityComponentSystem;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
 namespace Game.Cli
 {
@@ -16,19 +20,22 @@ namespace Game.Cli
 
         private int Run()
         {
+            
 
             var levensloop = new Engine.Game();
 
             levensloop.Registery.Register(new WriteToConsoleSystem());
-            
 
-            var entity = levensloop.EntityRegistery.Create("Persoon 1");
-            var entity3 = levensloop.EntityRegistery.Create("Persoon 3");
+            levensloop.EntityLoader.LoadJson(File.ReadAllText("entity.json"));
 
             levensloop.Run();
 
             return 0;
 
         }
+
+        
     }
+
+    
 }
