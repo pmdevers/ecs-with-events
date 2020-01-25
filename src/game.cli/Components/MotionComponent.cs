@@ -1,14 +1,12 @@
-﻿using Game.Engine.EntityComponentSystem;
+﻿using Game.Engine;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Game.Cli.Components
 {
-    public class MotionComponent : IComponent
+    public class MotionComponent : Component
     {
-        public IEntityRecord Record { get; set; }
-
         public float Velocity { get; set; }
 
     }

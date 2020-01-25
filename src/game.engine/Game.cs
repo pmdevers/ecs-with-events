@@ -2,6 +2,7 @@
 
 using Game.Engine.EntityComponentSystem;
 using Game.Engine.EventSystem;
+using Game.Engine.Graphics;
 using Game.Engine.Systems;
 
 namespace Game.Engine
@@ -17,6 +18,8 @@ namespace Game.Engine
             EventManager = new EventManager();
             EntityRegistery = new EntityRegistery();
             EntityLoader = new EntityLoader(EntityRegistery);
+
+            Registery.Register(new GraphicsSystem());
         }
 
         public ISystemRegistery Registery { get; }
@@ -40,7 +43,7 @@ namespace Game.Engine
             while (_isRunning)
             {
                 var gameTime = DateTime.Now - _previousGameTime;
-                _previousGameTime = _previousGameTime + gameTime;
+                _previousGameTime += gameTime;
 
                 EventManager.ProcessEvents(gameTime);
 

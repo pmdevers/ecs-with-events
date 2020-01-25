@@ -15,7 +15,7 @@ namespace Game.Engine
             public Dictionary<string, JsonElement> Components { get; set; }
         }
 
-        private IDictionary<string, Type> _cachedTypes;
+        private readonly IDictionary<string, Type> _cachedTypes;
         private readonly IEntityRegistery _registery;
 
         public EntityLoader(IEntityRegistery registery)

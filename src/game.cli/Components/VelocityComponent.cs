@@ -1,12 +1,12 @@
-﻿using Game.Engine.EntityComponentSystem;
+﻿using Game.Engine;
+using Game.Engine.EntityComponentSystem;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Game.Cli.Components
 {
-    public class VelocityComponent : IComponent
+    public class VelocityComponent : Component
     {
-        public IEntityRecord Record { get; set; }
     }
 }

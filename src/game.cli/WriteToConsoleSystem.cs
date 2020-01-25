@@ -14,7 +14,7 @@ namespace Game.Cli
 
                 foreach(var c in Registery.GetComponents(e))
                 {
-                    Console.WriteLine(c.GetType().Name);
+                    Console.WriteLine(c.ToString());
                 }
             }
         }
