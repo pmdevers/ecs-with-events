@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
+using Game.Engine.Graphics;
+
 namespace Game.Cli
 {
     class Program
@@ -20,8 +22,6 @@ namespace Game.Cli
 
         private int Run()
         {
-            
-
             var levensloop = new Engine.Game();
 
             levensloop.Registery.Register(new WriteToConsoleSystem());

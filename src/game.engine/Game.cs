@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Game.Engine.EntityComponentSystem;
+using Game.Engine.Events;
 using Game.Engine.EventSystem;
 using Game.Engine.Graphics;
 using Game.Engine.Systems;
@@ -18,18 +19,21 @@ namespace Game.Engine
             EventManager = new EventManager();
             EntityRegistery = new EntityRegistery();
             EntityLoader = new EntityLoader(EntityRegistery);
+            Window = new Window(1024, 786, "Game.Engine");
 
-            Registery.Register(new GraphicsSystem());
+
+            EventManager.RegisterListener<CloseWindowEvent>(WindowClosed);
         }
 
         public ISystemRegistery Registery { get; }
         public IEntityRegistery EntityRegistery { get; }
         public EntityLoader EntityLoader { get; }
         public EventManager EventManager { get; }
-
+        public Window Window { get; }
         public void Run()
         {
             var initiable = Registery.GetEnumerator();
+            Window.Init(EventManager);
             while (initiable.MoveNext())
             {
                 var system = initiable.Current;
@@ -63,7 +67,14 @@ namespace Game.Engine
                     if (system is IDisposable s)
                         s.Dispose();
                 }
+
+                Window.Update(gameTime);
             }
+        }
+
+        private void WindowClosed(Event e)
+        {
+            _isRunning = false;
         }
     }
 }
