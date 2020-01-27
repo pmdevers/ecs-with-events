@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Game.Engine.Graphics.OpenGL
 {
     public static class GL
     {
         public const int ARRAY_BUFFER                       = 0x8892;
+        public const int ELEMENT_ARRAY_BUFFER               = 0x8893;
         public const int STATIC_DRAW                        = 0x88E4;
         public const int FLOAT = 0x1406;
         public const int TRIANGLES = 0x0004;
@@ -22,6 +24,8 @@ namespace Game.Engine.Graphics.OpenGL
 
         [DllImport(OPENGL_DLL, EntryPoint = "glDrawArrays")] public static extern void DrawArrays(int mode, int first, int count);
 
+        public delegate void glCreateBuffers(int n, ref uint buffers);
+        public delegate void glDeleteBuffers(int n, ref uint buffers);
         public delegate void glGenBuffers(int n, ref uint buffers);
         public delegate void glBindBuffer(uint target, uint buffer);
         public delegate void glBufferData(uint target, IntPtr size, float[] data, uint usage);
@@ -35,6 +39,8 @@ namespace Game.Engine.Graphics.OpenGL
         public delegate void glGetIntegerv (uint pname, int[] parameters);
 
 
+        public static glCreateBuffers CreateBuffers;
+        public static glDeleteBuffers DeleteBuffers;
         public static glGenBuffers GenBuffers;
         public static glBindBuffer BindBuffer;
         public static glBufferData BufferData;
@@ -61,6 +67,8 @@ namespace Game.Engine.Graphics.OpenGL
 
         public static void LoadFunctionPointers()
         {
+            CreateBuffers = GetMethod<glCreateBuffers>();
+            DeleteBuffers = GetMethod<glDeleteBuffers>();
             GenBuffers = GetMethod<glGenBuffers>();
             BindBuffer = GetMethod<glBindBuffer>();
             BufferData = GetMethod<glBufferData>();
@@ -71,6 +79,7 @@ namespace Game.Engine.Graphics.OpenGL
             ClearColor = GetMethod<glClearColor>();
             Clear = GetMethod<glClear>();
             GetString = GetMethod<glGetString>();
+
         }
         
     }
