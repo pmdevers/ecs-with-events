@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Game.Engine.EntityComponentSystem;
+using Game.Engine;
 using Game.Engine.Events;
 using Game.Engine.EventSystem;
 using Game.Engine.Systems;
@@ -9,17 +9,16 @@ namespace Game.Cli
 {
     public class WriteToConsoleSystem : EntitySystem
     {
-        public override void Init(IEntityRegistery registery, EventManager eventManager)
+        public WriteToConsoleSystem()
         {
-            eventManager.RegisterListener<KeyPressedEvent>(HandleEvent);
-            base.Init(registery, eventManager);
+            Game.Engine.Game.EventManager.RegisterListener<KeyPressedEvent>(HandleEvent);
         }
 
         private void HandleEvent(Event e)
         {
             if (e.EventData is KeyPressedEvent kp)
             {
-                Console.WriteLine(kp.KeyCode);
+                Console.WriteLine(kp.ToString());
             }
         }
 

@@ -12,6 +12,11 @@ namespace Game.Engine.Events
 
         public KeyCode KeyCode { get; }
         public int Pressed { get; }
+
+        public override string ToString()
+        {
+            return $"The Key: '{KeyCode.Key}' was pressed";
+        }
     }
 
     public class KeyReleasedEvent

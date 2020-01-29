@@ -4,17 +4,17 @@ using System.Text;
 
 namespace Game.Engine.Graphics.OpenGL
 {
-    public class OpenGLIndexBuffer
+    public class IndexBuffer
     {
         private uint _rendererId;
-        public OpenGLIndexBuffer(float[] indices, UInt32 count)
+        public IndexBuffer(float[] indices, UInt32 count)
         {
             GL.CreateBuffers(1, ref _rendererId);
             GL.BindBuffer(GL.ARRAY_BUFFER, _rendererId);
             GL.BufferData(GL.ARRAY_BUFFER, new IntPtr(indices.Length * sizeof(float)), indices, GL.STATIC_DRAW);
         }
 
-        ~OpenGLIndexBuffer()
+        ~IndexBuffer()
         {
             GL.DeleteBuffers(1, ref _rendererId);
         }

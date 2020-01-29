@@ -11,18 +11,26 @@ namespace Game.Engine.Graphics.OpenGL
         public const int ARRAY_BUFFER                       = 0x8892;
         public const int ELEMENT_ARRAY_BUFFER               = 0x8893;
         public const int STATIC_DRAW                        = 0x88E4;
-        public const int FLOAT = 0x1406;
-        public const int TRIANGLES = 0x0004;
-        public const int COLOR_BUFFER_BIT = 0x4000;
+        public const uint UNSIGNED_INT                      = 0x1405;
+        public const int FLOAT                              = 0x1406;
+
+        public const int TRIANGLES                          = 0x0004;
+        public const int COLOR_BUFFER_BIT                   = 0x4000;
 
         public const uint VENDOR                         = 0x1F00;
         public const uint RENDERER                       = 0x1F01;
         public const uint VERSION                        = 0x1F02;
         public const uint EXTENSIONS                     = 0x1F03;
 
+        public const uint VERTEX_SHADER = 0;
+        public const uint COMPILE_STATUS = 0;
+        public const uint INFO_LOG_LENGTH = 0;
+
         private const string OPENGL_DLL = "opengl32";
 
-        [DllImport(OPENGL_DLL, EntryPoint = "glDrawArrays")] public static extern void DrawArrays(int mode, int first, int count);
+        [DllImport(OPENGL_DLL, EntryPoint = "glDrawArrays")] 
+        public static extern void DrawArrays(int mode, int first, int count);
+
 
         public delegate void glCreateBuffers(int n, ref uint buffers);
         public delegate void glDeleteBuffers(int n, ref uint buffers);
@@ -37,8 +45,16 @@ namespace Game.Engine.Graphics.OpenGL
         public delegate void glClear(int mask);
         public delegate sbyte glGetString(uint name);
         public delegate void glGetIntegerv (uint pname, int[] parameters);
+        public delegate void glDrawElements(int mode, int count, uint type, IntPtr indices);
+        public delegate uint glCreateShader(uint type);
+        public delegate void glShaderSource(uint shader, int count, string _string, ref int length);
+        public delegate void glCompileShader(uint shader);
+        public delegate void glGetShaderiv(uint shader, uint pname, ref int _params);
 
 
+
+
+        public static glDrawElements DrawElements;
         public static glCreateBuffers CreateBuffers;
         public static glDeleteBuffers DeleteBuffers;
         public static glGenBuffers GenBuffers;
@@ -52,6 +68,11 @@ namespace Game.Engine.Graphics.OpenGL
         public static glClear Clear;
         public static glGetString GetString;
         public static glGetIntegerv GetInteger;
+
+        public static glCreateShader CreateShader;
+        public static glShaderSource ShaderSource;
+        public static glCompileShader CompileShader;
+        public static glGetShaderiv GetShaderiv;
 
 
         private static T GetMethod<T>()
@@ -67,6 +88,7 @@ namespace Game.Engine.Graphics.OpenGL
 
         public static void LoadFunctionPointers()
         {
+            DrawElements = GetMethod<glDrawElements>();
             CreateBuffers = GetMethod<glCreateBuffers>();
             DeleteBuffers = GetMethod<glDeleteBuffers>();
             GenBuffers = GetMethod<glGenBuffers>();
@@ -80,6 +102,10 @@ namespace Game.Engine.Graphics.OpenGL
             Clear = GetMethod<glClear>();
             GetString = GetMethod<glGetString>();
 
+            CreateShader = GetMethod<glCreateShader>();
+            ShaderSource = GetMethod<glShaderSource>();
+            CompileShader = GetMethod<glCompileShader>();
+            GetShaderiv = GetMethod<glGetShaderiv>();
         }
         
     }

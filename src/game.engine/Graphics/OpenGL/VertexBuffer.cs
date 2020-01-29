@@ -4,17 +4,17 @@ using System.Text;
 
 namespace Game.Engine.Graphics.OpenGL
 {
-    public class OpenGLVertexBuffer
+    public class VertexBuffer
     {
         private uint _rendererId;
-        public OpenGLVertexBuffer(float[] vertices, IntPtr size)
+        public VertexBuffer(float[] vertices, IntPtr size)
         {
             GL.CreateBuffers(1, ref _rendererId);
             GL.BindBuffer(GL.ARRAY_BUFFER, _rendererId);
             GL.BufferData(GL.ARRAY_BUFFER, size, vertices, GL.STATIC_DRAW);
         }
 
-        ~OpenGLVertexBuffer()
+        ~VertexBuffer()
         {
             GL.DeleteBuffers(1, ref  _rendererId);
         }

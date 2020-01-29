@@ -3,12 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Game.Engine</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Components\**" />
+    <Compile Remove="Serialization\**" />
     <EmbeddedResource Remove="Components\**" />
+    <EmbeddedResource Remove="Serialization\**" />
     <None Remove="Components\**" />
+    <None Remove="Serialization\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,10 +37,6 @@
     <None Update="vulkan-1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Serialization\" />
   </ItemGroup>
 
 </Project>

@@ -9,8 +9,6 @@ namespace Game.Engine.Systems
     public class EntitySystem : ISystem
     {
         public IEntityRegistery Registery { get; set; }
-        public EventManager EventManager { get; set; }
-
         public virtual void Update(TimeSpan gameTime)
         {
         }
@@ -25,10 +23,9 @@ namespace Game.Engine.Systems
             return Registery.All();
         }
 
-        public virtual void Init(IEntityRegistery registery, EventManager eventManager)
+        public virtual void Init(IEntityRegistery registery)
         {
             Registery = registery;
-            EventManager = eventManager;
         }
     }
 }
