@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\game.glfw\game.glfw.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="glfw3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

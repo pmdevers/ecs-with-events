@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
+using game.glfw;
+using static game.OpenGL.GL;
+
 namespace Game.Engine.Graphics.OpenGL
 {
     public class IndexBuffer
@@ -9,24 +12,24 @@ namespace Game.Engine.Graphics.OpenGL
         private uint _rendererId;
         public IndexBuffer(float[] indices, UInt32 count)
         {
-            GL.CreateBuffers(1, ref _rendererId);
-            GL.BindBuffer(GL.ARRAY_BUFFER, _rendererId);
-            GL.BufferData(GL.ARRAY_BUFFER, new IntPtr(indices.Length * sizeof(float)), indices, GL.STATIC_DRAW);
+            CreateBuffers(1, ref _rendererId);
+            BindBuffer(ARRAY_BUFFER, _rendererId);
+            BufferData(ARRAY_BUFFER, new IntPtr(indices.Length * sizeof(float)), indices, STATIC_DRAW);
         }
 
         ~IndexBuffer()
         {
-            GL.DeleteBuffers(1, ref _rendererId);
+            DeleteBuffers(1, ref _rendererId);
         }
 
         public void Bind()
         {
-            GL.BindBuffer(GL.ELEMENT_ARRAY_BUFFER, _rendererId);
+            BindBuffer(ELEMENT_ARRAY_BUFFER, _rendererId);
         }
 
         public void Unbind()
         {
-            GL.BindBuffer(GL.ELEMENT_ARRAY_BUFFER, 0);
+            BindBuffer(ELEMENT_ARRAY_BUFFER, 0);
         }
     }
 }

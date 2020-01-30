@@ -11,10 +11,19 @@ namespace Game.Cli
     {
         public WriteToConsoleSystem()
         {
-            Game.Engine.Game.EventManager.RegisterListener<KeyPressedEvent>(HandleEvent);
+            Game.Engine.Game.EventManager.RegisterListener<KeyPressedEvent>(HandleKeyPress);
+            Game.Engine.Game.EventManager.RegisterListener<MouseMovedEvent>(HandleMouseMove);
         }
 
-        private void HandleEvent(Event e)
+        private void HandleMouseMove(Event e)
+        {
+            if (e.EventData is MouseMovedEvent mv)
+            {
+                Console.WriteLine($"Mouse X:'{mv.XPos}' - Y: '{mv.YPos}';");
+            }
+        }
+
+        private void HandleKeyPress(Event e)
         {
             if (e.EventData is KeyPressedEvent kp)
             {

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
+using game.glfw;
+using static game.OpenGL.GL;
+
 namespace Game.Engine.Graphics.OpenGL
 {
     public class Shader
@@ -15,29 +18,28 @@ namespace Game.Engine.Graphics.OpenGL
             //string fragmentSource = // Get source code for fragment shader.
 
             // Create an empty vertex shader handle
-            uint vertexShader = GL.CreateShader(GL.VERTEX_SHADER);
+            uint vertexShader = CreateShader(VERTEX_SHADER);
 
             // Send the vertex shader source code to GL
             // Note that std::string's .c_str is NULL character terminated.
             int lenght = 0;
-            GL.ShaderSource(vertexShader, 1, vertexSource, ref lenght);
+            ShaderSource(vertexShader, 1, vertexSource, ref lenght);
 
             // Compile the vertex shader
-            GL.CompileShader(vertexShader);
+            CompileShader(vertexShader);
 
-            int isCompiled = 0;
-            GL.GetShaderiv(vertexShader, GL.COMPILE_STATUS, ref isCompiled);
-            if (isCompiled == 0)
+            int param = 0;
+            GetShaderiv(vertexShader, COMPILE_STATUS, ref param);
+            if (param == 0)
             {
-                int maxLength = 0;
-                GL.GetShaderiv(vertexShader, GL.INFO_LOG_LENGTH, ref maxLength);
+                GetShaderiv(vertexShader, COMPILE_STATUS, ref param);
 
                 // The maxLength includes the NULL character
-                std::vector<GLchar> infoLog(maxLength);
-                glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
+                var infoLog = new StringBuilder();
+                GetShaderInfoLog(vertexShader, param, ref param, infoLog);
 
                 // We don't need the shader anymore.
-                glDeleteShader(vertexShader);
+                DeleteShader(vertexShader);
 
                 // Use the infoLog as you see fit.
 
@@ -46,30 +48,28 @@ namespace Game.Engine.Graphics.OpenGL
             }
 
             // Create an empty fragment shader handle
-            GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+            uint fragmentShader = CreateShader(FRAGMENT_SHADER);
 
             // Send the fragment shader source code to GL
             // Note that std::string's .c_str is NULL character terminated.
-            source = (const GLchar*)fragmentSource.c_str();
-            glShaderSource(fragmentShader, 1, &source, 0);
+            ShaderSource(fragmentShader, 1, fragmentSource, ref lenght);
 
             // Compile the fragment shader
-            glCompileShader(fragmentShader);
+            CompileShader(fragmentShader);
 
-            glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
-            if (isCompiled == GL_FALSE)
+            GetShaderiv(fragmentShader, COMPILE_STATUS, ref param);
+            if (param == 0)
             {
-                GLint maxLength = 0;
-                glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
+                GetShaderiv(fragmentShader, INFO_LOG_LENGTH, ref param);
 
                 // The maxLength includes the NULL character
-                std::vector<GLchar> infoLog(maxLength);
-                glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
+                var infoLog = new StringBuilder();
+                GetShaderInfoLog(fragmentShader, param, ref param, infoLog);
 
                 // We don't need the shader anymore.
-                glDeleteShader(fragmentShader);
+                DeleteShader(fragmentShader);
                 // Either of them. Don't leak shaders.
-                glDeleteShader(vertexShader);
+                DeleteShader(vertexShader);
 
                 // Use the infoLog as you see fit.
 
@@ -80,32 +80,30 @@ namespace Game.Engine.Graphics.OpenGL
             // Vertex and fragment shaders are successfully compiled.
             // Now time to link them together into a program.
             // Get a program object.
-            GLuint program = glCreateProgram();
+            uint program = CreateProgram();
 
             // Attach our shaders to our program
-            glAttachShader(program, vertexShader);
-            glAttachShader(program, fragmentShader);
+            AttachShader(program, vertexShader);
+            AttachShader(program, fragmentShader);
 
             // Link our program
-            glLinkProgram(program);
+            LinkProgram(program);
 
             // Note the different functions here: glGetProgram* instead of glGetShader*.
-            GLint isLinked = 0;
-            glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
-            if (isLinked == GL_FALSE)
+            GetProgramiv(program, LINK_STATUS, ref param);
+            if (param == 0)
             {
-                GLint maxLength = 0;
-                glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+                GetProgramiv(program, INFO_LOG_LENGTH, ref param);
 
+                var infoLog = new StringBuilder();
                 // The maxLength includes the NULL character
-                std::vector<GLchar> infoLog(maxLength);
-                glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+                GetProgramInfoLog(program, param,ref param, infoLog);
 
                 // We don't need the program anymore.
-                glDeleteProgram(program);
+                DeleteProgram(program);
                 // Don't leak shaders either.
-                glDeleteShader(vertexShader);
-                glDeleteShader(fragmentShader);
+                DeleteShader(vertexShader);
+                DeleteShader(fragmentShader);
 
                 // Use the infoLog as you see fit.
 
@@ -114,8 +112,8 @@ namespace Game.Engine.Graphics.OpenGL
             }
 
             // Always detach shaders after a successful link.
-            glDetachShader(program, vertexShader);
-            glDetachShader(program, fragmentShader);
+            DetachShader(program, vertexShader);
+            DetachShader(program, fragmentShader);
         }
 
         public string VectorSrc { get; }

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 
-using Game.Engine.Graphics.OpenGL;
+using game.glfw;
+using static game.OpenGL.GL;
 
 namespace Game.Engine.Graphics
 {
@@ -15,15 +13,15 @@ namespace Game.Engine.Graphics
         {
             this.windowHandle = windowHandle;
             GLFW.MakeContextCurrent(windowHandle);
-            GL.LoadFunctionPointers();   
+            LoadFunctionPointers();
         }
 
         public void Init()
         {
             Console.WriteLine("OpenGL Info:");
-            Console.WriteLine("  Vendor: {0}", GL.GetString(GL.VENDOR));
-            Console.WriteLine("  Renderer: {0}", GL.GetString(GL.RENDERER)); 
-            Console.WriteLine("  Version: {0}", GL.GetString(GL.VERSION));
+            Console.WriteLine("  Vendor: {0}", GetString(VENDOR));
+            Console.WriteLine("  Renderer: {0}", GetString(RENDERER));
+            Console.WriteLine("  Version: {0}", GetString(VERSION));
         }
 
         public void SwapBuffers()

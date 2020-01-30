@@ -1,33 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Runtime.InteropServices;
-using System.Text;
 
 using Game.Engine.Events;
 using Game.Engine.EventSystem;
 using Game.Engine.Input;
-using Game.Engine.Tools;
+
+using static game.glfw.GLFW;
 
 namespace Game.Engine.Graphics
 {
-
-    
     public class Window
     {
-        private static readonly GLFW.GLFWwindowsizefun onWindowRezise = new GLFW.GLFWwindowsizefun(OnWindowResize);
-        private static readonly GLFW.GLFWwindowclosefun onWindowClosed = new GLFW.GLFWwindowclosefun(OnWindowClosed);
-        private static readonly GLFW.GLFWKeyfun onkeyDown = new GLFW.GLFWKeyfun(OnKey);
-        private static readonly GLFW.GLFWMousefun onMouseButton = new GLFW.GLFWMousefun(OnMouseButton);
-        private static readonly GLFW.GLFWScrollfun onMouseScroll = new GLFW.GLFWScrollfun(OnMouseScroll);
-        private static readonly GLFW.GLFWCursorfun onMouseMove = new GLFW.GLFWCursorfun(OnMouseMove);
-      
-        public int Width {get; private set; }
-        public int Height { get; private set; }
-        public string Title { get; private set; }
-    
-        public IntPtr WindowHandle;
+        private static readonly GLFWwindowsizefun onWindowRezise = OnWindowResize;
+        private static readonly GLFWwindowclosefun onWindowClosed = OnWindowClosed;
+        private static readonly GLFWKeyfun onkeyDown = OnKey;
+        private static readonly GLFWMousefun onMouseButton = OnMouseButton;
+        private static readonly GLFWScrollfun onMouseScroll = OnMouseScroll;
+        private static readonly GLFWCursorfun onMouseMove = OnMouseMove;
+
         public IGraphicContext Context;
+
+        public IntPtr WindowHandle;
 
         public Window(int width, int height, string title)
         {
@@ -36,20 +28,23 @@ namespace Game.Engine.Graphics
             Title = title;
         }
 
+        public int Width { get; }
+        public int Height { get; }
+        public string Title { get; }
+
         public void Init()
         {
-            GLFW.Initialise();
-            WindowHandle = GLFW.CreateWindow(Width, Height, Title, IntPtr.Zero, IntPtr.Zero);
-            //GLFW.MakeContextCurrent(WindowHandle);
+            Initialise();
+            WindowHandle = CreateWindow(Width, Height, Title, IntPtr.Zero, IntPtr.Zero);
             Context = new OpenGLContext(ref WindowHandle);
             Context.Init();
 
-            GLFW.SetWindowSizeCallback(WindowHandle, onWindowRezise);
-            GLFW.SetWindowCloseCallback(WindowHandle, onWindowClosed);
-            GLFW.SetKeyCallback(WindowHandle, onkeyDown);
-            GLFW.SetMouseButtonCallback(WindowHandle, onMouseButton);
-            GLFW.SetScrollCallback(WindowHandle, onMouseScroll);
-            GLFW.SetCursorPosCallback(WindowHandle, onMouseMove);
+            SetWindowSizeCallback(WindowHandle, onWindowRezise);
+            SetWindowCloseCallback(WindowHandle, onWindowClosed);
+            SetKeyCallback(WindowHandle, onkeyDown);
+            SetMouseButtonCallback(WindowHandle, onMouseButton);
+            SetScrollCallback(WindowHandle, onMouseScroll);
+            SetCursorPosCallback(WindowHandle, onMouseMove);
 
             Game.EventManager.RegisterListener<CloseWindowEvent>(Shutdown);
         }
@@ -66,17 +61,17 @@ namespace Game.Engine.Graphics
 
         private static void OnMouseButton(IntPtr window, int button, int action, int mods)
         {
-            
-            switch ((GLFW.KeyActions)action)
+            switch ((KeyActions)action)
             {
-                case GLFW.KeyActions.Press:
+                case KeyActions.Press:
                 {
-                        Game.EventManager.QueueEvent(new MouseButtonPressedEvent(new MouseCode(button)));
+                    Game.EventManager.QueueEvent(new MouseButtonPressedEvent(new MouseCode(button)));
                     break;
                 }
-                case GLFW.KeyActions.Release:
+
+                case KeyActions.Release:
                 {
-                        Game.EventManager.QueueEvent(new MouseButtonReleasedEvent(new MouseCode(button)));
+                    Game.EventManager.QueueEvent(new MouseButtonReleasedEvent(new MouseCode(button)));
                     break;
                 }
             }
@@ -84,24 +79,23 @@ namespace Game.Engine.Graphics
 
         private static void OnKey(IntPtr window, int key, int scancode, int action, int mods)
         {
-           
-
-            switch ((GLFW.KeyActions)action)
+            switch ((KeyActions)action)
             {
-                case GLFW.KeyActions.Press:
+                case KeyActions.Press:
                 {
+                    Game.EventManager.QueueEvent(new KeyPressedEvent(new KeyCode(key), 0));
+                    break;
+                }
 
-                        Game.EventManager.QueueEvent(new KeyPressedEvent(new KeyCode(key), 0));
+                case KeyActions.Release:
+                {
+                    Game.EventManager.QueueEvent(new KeyReleasedEvent(new KeyCode(key)));
                     break;
                 }
-                case GLFW.KeyActions.Release:
+
+                case KeyActions.Repeat:
                 {
-                        Game.EventManager.QueueEvent(new KeyReleasedEvent(new KeyCode(key)));
-                    break;
-                }
-                case GLFW.KeyActions.Repeat:
-                {
-                        Game.EventManager.QueueEvent(new KeyPressedEvent(new KeyCode(key), 1));
+                    Game.EventManager.QueueEvent(new KeyPressedEvent(new KeyCode(key), 1));
                     break;
                 }
             }
@@ -120,13 +114,13 @@ namespace Game.Engine.Graphics
         public void Update(TimeSpan gameTime)
         {
             Context.SwapBuffers();
-            GLFW.PollEvents();
+            PollEvents();
         }
 
         public void Shutdown(Event e)
         {
-            GLFW.DestroyWindow(WindowHandle);
-            GLFW.Terminate();
+            DestroyWindow(WindowHandle);
+            Terminate();
         }
     }
 }

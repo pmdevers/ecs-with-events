@@ -7,6 +7,9 @@ using Game.Engine.Graphics;
 using Game.Engine.Graphics.OpenGL;
 using Game.Engine.Systems;
 
+using game.glfw;
+using static game.OpenGL.GL;
+
 namespace Game.Engine
 {
     public class Game
@@ -34,21 +37,21 @@ namespace Game.Engine
             Window.Init();
 
 
-            GL.GenVertexArrays(1, ref _vertexArray);
-            GL.BindVertexArray(_vertexArray);
+            GenVertexArrays(1, ref _vertexArray);
+            BindVertexArray(_vertexArray);
 
-            GL.GenBuffers(1, ref _vertexBuffer);
-            GL.BindBuffer(GL.ARRAY_BUFFER, _vertexBuffer);
-            GL.BufferData(GL.ARRAY_BUFFER, new IntPtr(sizeof(float) * vertices.Length), vertices, GL.STATIC_DRAW);
+            GenBuffers(1, ref _vertexBuffer);
+            BindBuffer(ARRAY_BUFFER, _vertexBuffer);
+            BufferData(ARRAY_BUFFER, new IntPtr(sizeof(float) * vertices.Length), vertices, STATIC_DRAW);
 
-            GL.EnableVertexAttribArray(0);
-            GL.VertexAttribPointer(0, 3, GL.FLOAT, false, 3 * sizeof(uint), IntPtr.Zero);
+            EnableVertexAttribArray(0);
+            VertexAttribPointer(0, 3, FLOAT, false, 3 * sizeof(uint), IntPtr.Zero);
 
-            GL.GenBuffers(1, ref _indexBuffer);
-            GL.BindBuffer(GL.ELEMENT_ARRAY_BUFFER, _indexBuffer);
+            GenBuffers(1, ref _indexBuffer);
+            BindBuffer(ELEMENT_ARRAY_BUFFER, _indexBuffer);
 
             float[] indeces = { 0, 1, 3 };
-            GL.BufferData(GL.ELEMENT_ARRAY_BUFFER, new IntPtr(sizeof(float) * indeces.Length), indeces, GL.STATIC_DRAW);
+            BufferData(ELEMENT_ARRAY_BUFFER, new IntPtr(sizeof(float) * indeces.Length), indeces, STATIC_DRAW);
 
 
             EventManager.RegisterListener<CloseWindowEvent>(WindowClosed);
@@ -74,12 +77,12 @@ namespace Game.Engine
 
             while (_isRunning)
             {
-                GL.ClearColor(0.1f, 0.1f, 0.1f, 1);
-                GL.Clear(GL.COLOR_BUFFER_BIT);
+                ClearColor(0.1f, 0.1f, 0.1f, 1);
+                Clear(COLOR_BUFFER_BIT);
 
-                GL.BindVertexArray(_vertexArray);
-                GL.DrawArrays(GL.TRIANGLES, 0, 3);
-                //GL.DrawElements(GL.TRIANGLES, 3, GL.FLOAT, IntPtr.Zero);
+                BindVertexArray(_vertexArray);
+                DrawArrays(TRIANGLES, 0, 3);
+                //DrawElements(TRIANGLES, 3, FLOAT, IntPtr.Zero);
 
                 var gameTime = DateTime.Now - _previousGameTime;
                 _previousGameTime += gameTime;

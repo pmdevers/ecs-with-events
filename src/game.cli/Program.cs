@@ -13,10 +13,6 @@ namespace Game.Cli
         static int Main(string[] args)
         {
             var returnValue = new Program().Run();
-
-            Console.WriteLine("Press any key");
-            Console.ReadKey();
-            
             return returnValue;
         }
 
