@@ -20,7 +20,7 @@ namespace Game.Engine.Graphics.OpenGL
             GCHandle handle = GCHandle.Alloc(indices, GCHandleType.Pinned);
             IntPtr ptr = handle.AddrOfPinnedObject();
 
-            BufferData(ARRAY_BUFFER, new IntPtr(indices.Length * sizeof(uint)), ptr, STATIC_DRAW);
+            BufferData(ARRAY_BUFFER, indices.Length * sizeof(uint), ptr, STATIC_DRAW);
 
             handle.Free();
         }
@@ -33,7 +33,7 @@ namespace Game.Engine.Graphics.OpenGL
             GCHandle handle = GCHandle.Alloc(indices, GCHandleType.Pinned);
             IntPtr ptr = handle.AddrOfPinnedObject();
 
-            BufferData(ARRAY_BUFFER, new IntPtr(indices.Length * sizeof(float)), ptr, STATIC_DRAW);
+            BufferData(ARRAY_BUFFER, indices.Length * sizeof(float), ptr, STATIC_DRAW);
 
             handle.Free();
         }

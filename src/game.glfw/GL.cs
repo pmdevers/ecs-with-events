@@ -61,7 +61,7 @@ namespace game.OpenGL
         public delegate void glDeleteBuffers(int n, ref uint buffers);
         public delegate void glGenBuffers(int n, ref uint buffers);
         public delegate void glBindBuffer(uint target, uint buffer);
-        public delegate void glBufferData(uint target, IntPtr size, IntPtr data, uint usage);
+        public delegate void glBufferData(uint target, int size, IntPtr data, uint usage);
         public delegate uint glCreateProgram();
 
         public delegate void glDeleteProgram(uint program);

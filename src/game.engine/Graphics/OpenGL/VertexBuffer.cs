@@ -19,7 +19,7 @@ namespace Game.Engine.Graphics.OpenGL
             GCHandle handle = GCHandle.Alloc(vertices, GCHandleType.Pinned);
             IntPtr ptr = handle.AddrOfPinnedObject();
             
-            BufferData(ARRAY_BUFFER, new IntPtr(sizeof(float) * vertices.Length), ptr, STATIC_DRAW);
+            BufferData(ARRAY_BUFFER, sizeof(float) * vertices.Length, ptr, STATIC_DRAW);
 
             handle.Free();
         }

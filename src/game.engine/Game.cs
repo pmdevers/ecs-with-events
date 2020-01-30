@@ -22,9 +22,10 @@ namespace Game.Engine
 
         float[] vertices =
             {
-                -0.5f, -0.5f, 0.0f,
-                0.5f, -0.5f, 0.0f,
-                0.0f, 0.5f, 0.0f,
+            
+                -1.0f, -1.0f, 0.0f,
+                1.0f, -1.0f, 0.0f,
+                0.0f, 1.0f, 0.0f,
             };
 
         uint _vertexArray = 0, _vertexBuffer = 0, _indexBuffer = 0;
@@ -46,13 +47,14 @@ namespace Game.Engine
 
             GenBuffers(1, ref _vertexBuffer);
             BindBuffer(ARRAY_BUFFER, _vertexBuffer);
-            GCHandle vertsHandle = GCHandle.Alloc(vertices, GCHandleType.Pinned);
-            IntPtr vertsPtr = vertsHandle.AddrOfPinnedObject();
-            BufferData(ARRAY_BUFFER, new IntPtr(sizeof(float) * vertices.Length), vertsPtr, STATIC_DRAW);
-            vertsHandle.Free();
 
+            IntPtr p = Marshal.AllocHGlobal(vertices.Length * sizeof(float));
+            Marshal.Copy(vertices, 0, p, vertices.Length);
+            BufferData(ARRAY_BUFFER, vertices.Length * sizeof(float), p, STATIC_DRAW);
+            Marshal.FreeHGlobal(p);
+            
             EnableVertexAttribArray(0);
-            VertexAttribPointer(0, 3, FLOAT, false, 3 * sizeof(uint), IntPtr.Zero);
+            
 
             GenBuffers(1, ref _indexBuffer);
             BindBuffer(ELEMENT_ARRAY_BUFFER, _indexBuffer);
@@ -62,7 +64,7 @@ namespace Game.Engine
 
             GCHandle indecHandle = GCHandle.Alloc(indeces, GCHandleType.Pinned);
             IntPtr indecPtr = indecHandle.AddrOfPinnedObject();
-            BufferData(ELEMENT_ARRAY_BUFFER, new IntPtr(sizeof(uint) * indeces.Length), indecPtr, STATIC_DRAW);
+            BufferData(ELEMENT_ARRAY_BUFFER, sizeof(uint) * indeces.Length, indecPtr, STATIC_DRAW);
 
             indecHandle.Free();
 
@@ -93,6 +95,9 @@ namespace Game.Engine
                 Clear(COLOR_BUFFER_BIT);
 
                 BindVertexArray(_vertexArray);
+                VertexAttribPointer(0, 3, FLOAT, false, 0, IntPtr.Zero);
+                //DrawArrays(TRIANGLES, 0, 3);
+
                 DrawElements(TRIANGLES, 3, UNSIGNED_INT, IntPtr.Zero);
 
                 var gameTime = DateTime.Now - _previousGameTime;
