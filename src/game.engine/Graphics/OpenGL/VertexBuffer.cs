@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 using game.glfw;
@@ -10,11 +11,17 @@ namespace Game.Engine.Graphics.OpenGL
     public class VertexBuffer
     {
         private uint _rendererId;
-        public VertexBuffer(float[] vertices, IntPtr size)
+        public VertexBuffer(float[] vertices)
         {
             CreateBuffers(1, ref _rendererId);
             BindBuffer(ARRAY_BUFFER, _rendererId);
-            BufferData(ARRAY_BUFFER, size, vertices, STATIC_DRAW);
+            
+            GCHandle handle = GCHandle.Alloc(vertices, GCHandleType.Pinned);
+            IntPtr ptr = handle.AddrOfPinnedObject();
+            
+            BufferData(ARRAY_BUFFER, new IntPtr(sizeof(float) * vertices.Length), ptr, STATIC_DRAW);
+
+            handle.Free();
         }
 
         ~VertexBuffer()

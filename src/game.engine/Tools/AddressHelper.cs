@@ -16,6 +16,12 @@ namespace Game.Engine.Tools
             reinterpreter = new ObjectReinterpreter { AsObject = new ObjectWrapper() };
         }
 
+        public static IntPtr GetPointer(object obj)
+        {
+            GCHandle indecHandle = GCHandle.Alloc(obj, GCHandleType.Pinned);
+            return indecHandle.AddrOfPinnedObject();
+        }
+
         public static IntPtr GetAddress(object obj)
         {
             lock (mutualObject)
