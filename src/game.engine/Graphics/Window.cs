@@ -111,7 +111,7 @@ namespace Game.Engine.Graphics
             Game.EventManager.QueueEvent(new CloseWindowEvent());
         }
 
-        public void Update(TimeSpan gameTime)
+        public void Update()
         {
             Context.SwapBuffers();
             PollEvents();
