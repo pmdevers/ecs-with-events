@@ -3,35 +3,38 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using game.glfw;
-using static game.OpenGL.GL;
+using static Game.Glfw.GL;
 
 namespace Game.Engine.Graphics.OpenGL
 {
     public class VertexBuffer
     {
-        private uint _rendererId;
-        public VertexBuffer(float[] vertices)
+        private readonly uint _vertexBufferObject;
+        public VertexBuffer()
         {
-            CreateBuffers(1, ref _rendererId);
-            BindBuffer(ARRAY_BUFFER, _rendererId);
-            
-            GCHandle handle = GCHandle.Alloc(vertices, GCHandleType.Pinned);
-            IntPtr ptr = handle.AddrOfPinnedObject();
-            
-            BufferData(ARRAY_BUFFER, sizeof(float) * vertices.Length, ptr, STATIC_DRAW);
-
-            handle.Free();
+            var ids = new uint[] { 0 };
+            CreateBuffers(1, ids);
+            _vertexBufferObject = ids[0];
         }
 
-        ~VertexBuffer()
+        public uint VertexBufferObject => _vertexBufferObject;
+
+        public void SetData(uint attributeIndex, float[] data, bool isNormalized, int stride)
         {
-            DeleteBuffers(1, ref  _rendererId);
+            IntPtr p = Marshal.AllocHGlobal(data.Length * sizeof(float));
+            Marshal.Copy(data, 0, p, data.Length);
+            BufferData(ARRAY_BUFFER, data.Length * sizeof(float), p, STATIC_DRAW);
+            Marshal.FreeHGlobal(p);
+
+            VertexAttribPointer(attributeIndex, data.Length * sizeof(float), FLOAT, isNormalized, stride, IntPtr.Zero);
+            EnableVertexAttribArray(attributeIndex);
         }
+
+        public bool IsCreated() { return _vertexBufferObject != 0; }
 
         public void Bind()
         {
-            BindBuffer(ARRAY_BUFFER, _rendererId);
+            BindBuffer(ARRAY_BUFFER, _vertexBufferObject);
         }
 
         public void Unbind()

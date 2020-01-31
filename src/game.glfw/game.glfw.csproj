@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Game.Glfw</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="GL.Constants.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="GL.Constants.cs" />
+  </ItemGroup>
 
 </Project>

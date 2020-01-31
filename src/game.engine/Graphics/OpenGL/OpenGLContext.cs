@@ -1,7 +1,8 @@
 ﻿using System;
 
-using game.glfw;
-using static game.OpenGL.GL;
+using Game.Glfw;
+
+using static Game.Glfw.GL;
 
 namespace Game.Engine.Graphics
 {

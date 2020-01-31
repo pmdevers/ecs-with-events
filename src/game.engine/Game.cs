@@ -6,11 +6,11 @@ using Game.Engine.Events;
 using Game.Engine.EventSystem;
 using Game.Engine.Graphics;
 using Game.Engine.Graphics.OpenGL;
+using Game.Engine.Graphics.OpenGL.Shaders;
 using Game.Engine.Systems;
 using Game.Engine.Tools;
 
-using game.glfw;
-using static game.OpenGL.GL;
+using static Game.Glfw.GL;
 
 namespace Game.Engine
 {
@@ -20,6 +20,12 @@ namespace Game.Engine
         private bool _isRunning;
         private DateTime _previousGameTime;
 
+        private VertexBufferArray _vao;
+        private VertexBuffer _vbo;
+        private IndexBuffer _ibo;
+
+        private ShaderProgram shader;
+
         float[] vertices =
             {
             
@@ -28,7 +34,7 @@ namespace Game.Engine
                 0.0f, 1.0f, 0.0f,
             };
 
-        uint _vertexArray = 0, _vertexBuffer = 0, _indexBuffer = 0;
+        uint[] _vertexArray, _vertexBuffer, _indexBuffer;
 
 
         public Game()
@@ -39,34 +45,69 @@ namespace Game.Engine
             Window = new Window(1024, 786, "Game.Engine");
             Window.Init();
 
+            var vertexShader =  
+@"#version 430 
+ 
+layout(location = 0) in vec3 a_position; 
 
-            GenVertexArrays(1, ref _vertexArray);
-            BindVertexArray(_vertexArray);
+void main() { 
+	gl_Position = vec4(a_position, 1.0); 
+}
+";
+
+            var fragmentShader = @" 
+ 
+out vec4 fcolor; 
+ 
+void main() 
+{ 
+fcolor = vec4(1.0, 0.0, 0.0, 1.0); 
+}
+";
+
+            shader = new ShaderProgram(vertexShader, fragmentShader, null);
+            shader.Bind();
+
+            _vao = new VertexBufferArray();
+            _vao.Bind();
+
+            _vbo = new VertexBuffer();
+            _vbo.Bind();
+            _vbo.SetData(0, vertices, false, 3);
+            
+            short[] indeces = { 0, 1, 3 };
+            _ibo = new IndexBuffer();
+            _ibo.Bind();
+            _ibo.SetData(indeces);
+            //_vertexArray = new uint[] { 0 };
+            //GenVertexArrays(1, _vertexArray);
+            //BindVertexArray(_vertexArray[0]);
 
             //var vertexBuffer = new VertexBuffer(vertices);
 
-            GenBuffers(1, ref _vertexBuffer);
-            BindBuffer(ARRAY_BUFFER, _vertexBuffer);
+            //_vertexBuffer = new uint[] { 0 };
+            //GenBuffers(1, _vertexBuffer);
+            //BindBuffer(ARRAY_BUFFER, _vertexBuffer[0]);
 
-            IntPtr p = Marshal.AllocHGlobal(vertices.Length * sizeof(float));
-            Marshal.Copy(vertices, 0, p, vertices.Length);
-            BufferData(ARRAY_BUFFER, vertices.Length * sizeof(float), p, STATIC_DRAW);
-            Marshal.FreeHGlobal(p);
+            //IntPtr p = Marshal.AllocHGlobal(vertices.Length * sizeof(float));
+            //Marshal.Copy(vertices, 0, p, vertices.Length);
+            //BufferData(ARRAY_BUFFER, vertices.Length * sizeof(float), p, STATIC_DRAW);
+            //Marshal.FreeHGlobal(p);
             
-            EnableVertexAttribArray(0);
+            //EnableVertexAttribArray(0);
             
+            //_indexBuffer = new uint[] { 0 };
+            //GenBuffers(1, _indexBuffer);
+            //BindBuffer(ELEMENT_ARRAY_BUFFER, _indexBuffer[0]);
 
-            GenBuffers(1, ref _indexBuffer);
-            BindBuffer(ELEMENT_ARRAY_BUFFER, _indexBuffer);
+            
+            ////var indexBuffer = new IndexBuffer(indeces);
 
-            uint[] indeces = { 0, 1, 3 };
-            //var indexBuffer = new IndexBuffer(indeces);
+            //GCHandle indecHandle = GCHandle.Alloc(indeces, GCHandleType.Pinned);
+            //IntPtr indecPtr = indecHandle.AddrOfPinnedObject();
+            //BufferData(ELEMENT_ARRAY_BUFFER, sizeof(uint) * indeces.Length, indecPtr, STATIC_DRAW);
 
-            GCHandle indecHandle = GCHandle.Alloc(indeces, GCHandleType.Pinned);
-            IntPtr indecPtr = indecHandle.AddrOfPinnedObject();
-            BufferData(ELEMENT_ARRAY_BUFFER, sizeof(uint) * indeces.Length, indecPtr, STATIC_DRAW);
-
-            indecHandle.Free();
+            //indecHandle.Free();
 
             EventManager.RegisterListener<CloseWindowEvent>(WindowClosed);
         }
@@ -94,9 +135,10 @@ namespace Game.Engine
                 ClearColor(0.1f, 0.1f, 0.1f, 1);
                 Clear(COLOR_BUFFER_BIT);
 
-                BindVertexArray(_vertexArray);
-                VertexAttribPointer(0, 3, FLOAT, false, 0, IntPtr.Zero);
-                //DrawArrays(TRIANGLES, 0, 3);
+                _vao.Bind();
+                //BindVertexArray(_vertexArray[0]);
+                //VertexAttribPointer(0, 3, FLOAT, false, 0, IntPtr.Zero);
+                ////DrawArrays(TRIANGLES, 0, 3);
 
                 DrawElements(TRIANGLES, 3, UNSIGNED_INT, IntPtr.Zero);
 

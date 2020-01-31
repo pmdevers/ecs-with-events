@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace game.glfw
+namespace Game.Glfw
 {
     public static class GLFW
     {

@@ -4,7 +4,7 @@ using Game.Engine.Events;
 using Game.Engine.EventSystem;
 using Game.Engine.Input;
 
-using static game.glfw.GLFW;
+using static Game.Glfw.GLFW;
 
 namespace Game.Engine.Graphics
 {

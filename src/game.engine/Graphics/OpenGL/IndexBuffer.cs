@@ -3,49 +3,35 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using game.glfw;
-using static game.OpenGL.GL;
+using static Game.Glfw.GL;
 
 namespace Game.Engine.Graphics.OpenGL
 {
     public class IndexBuffer
     {
-        private uint _rendererId;
+        private readonly uint _bufferObject;
 
-        public IndexBuffer(uint[] indices)
+        public IndexBuffer()
         {
-            CreateBuffers(1, ref _rendererId);
-            BindBuffer(ARRAY_BUFFER, _rendererId);
-
-            GCHandle handle = GCHandle.Alloc(indices, GCHandleType.Pinned);
-            IntPtr ptr = handle.AddrOfPinnedObject();
-
-            BufferData(ARRAY_BUFFER, indices.Length * sizeof(uint), ptr, STATIC_DRAW);
-
-            handle.Free();
+            var ids = new uint[1];
+            GenBuffers(1, ids);
+            _bufferObject = ids[0];
         }
 
-        public IndexBuffer(float[] indices)
+        public uint IndexBufferObject => _bufferObject;
+        public bool IsCreated() { return _bufferObject != 0; }
+
+        public void SetData(short[] data)
         {
-            CreateBuffers(1, ref _rendererId);
-            BindBuffer(ARRAY_BUFFER, _rendererId);
-
-            GCHandle handle = GCHandle.Alloc(indices, GCHandleType.Pinned);
-            IntPtr ptr = handle.AddrOfPinnedObject();
-
-            BufferData(ARRAY_BUFFER, indices.Length * sizeof(float), ptr, STATIC_DRAW);
-
-            handle.Free();
-        }
-
-        ~IndexBuffer()
-        {
-            DeleteBuffers(1, ref _rendererId);
+            IntPtr p = Marshal.AllocHGlobal(data.Length * sizeof(float));
+            Marshal.Copy(data, 0, p, data.Length);
+            BufferData(ELEMENT_ARRAY_BUFFER, data.Length * sizeof(short), p, STATIC_DRAW);
+            Marshal.FreeHGlobal(p);
         }
 
         public void Bind()
         {
-            BindBuffer(ELEMENT_ARRAY_BUFFER, _rendererId);
+            BindBuffer(ELEMENT_ARRAY_BUFFER, _bufferObject);
         }
 
         public void Unbind()
