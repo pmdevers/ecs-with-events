@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Engine.Renderer;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,16 +7,16 @@ using static Game.Glfw.GL;
 
 namespace Game.Engine.Graphics.OpenGL.Shaders
 {
-    public class ShaderProgram
+    public class OpenGLShaderProgram : ShaderProgram
     {
         private uint _shaderProgramObject;
-        private readonly Shader _vertexShader;
-        private readonly Shader _fragmentShader;
-        public ShaderProgram(string vertexShaderSource, string fragmentShaderSource,
+        private readonly OpenGLShader _vertexShader;
+        private readonly OpenGLShader _fragmentShader;
+        public OpenGLShaderProgram(string vertexShaderSource, string fragmentShaderSource,
             Dictionary<uint, string> attributeLocations)
         {
-            _vertexShader = new Shader(VERTEX_SHADER, vertexShaderSource);
-            _fragmentShader = new Shader(FRAGMENT_SHADER, fragmentShaderSource);
+            _vertexShader = new OpenGLShader(VERTEX_SHADER, vertexShaderSource);
+            _fragmentShader = new OpenGLShader(FRAGMENT_SHADER, fragmentShaderSource);
 
             _shaderProgramObject = CreateProgram();
 
@@ -27,6 +28,8 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
                 foreach (var vertexAttributeLocation in attributeLocations)
                 {
                     // TODO: glBindAttributeLocation
+
+
                 }
             }
 
@@ -37,10 +40,12 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
                 Console.WriteLine($"Failed to compile program with ID {_shaderProgramObject}.");
                 Console.WriteLine(GetInfoLog());
             }
+
+            Bind();
         }
 
 
-        public void Delete()
+        public override void Delete()
         {
             DetachShader(_shaderProgramObject, _vertexShader.ShaderObject);
             DetachShader(_shaderProgramObject, _fragmentShader.ShaderObject);
@@ -51,12 +56,12 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
             _shaderProgramObject = 0;
         }
 
-        public void Bind()
+        public override void Bind()
         {
             UseProgram(_shaderProgramObject);
         }
 
-        public void Unbind()
+        public override void Unbind()
         {
             UseProgram(0);
         }
@@ -66,7 +71,7 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
         public bool GetLinkStatus()
         {
             var p = new[] { 0 };
-            GetShaderiv(_shaderProgramObject, LINK_STATUS, p);
+            GetProgramiv(_shaderProgramObject, LINK_STATUS, p);
             return p[0] == 1;
         }
         public string GetInfoLog()

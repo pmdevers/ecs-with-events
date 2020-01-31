@@ -5,10 +5,10 @@ using static Game.Glfw.GL;
 
 namespace Game.Engine.Graphics.OpenGL.Shaders
 {
-    public class Shader
+    public class OpenGLShader
     {
         private uint _shaderObject;
-        public Shader(uint shaderType, string source)
+        public OpenGLShader(uint shaderType, string source)
         {
             _shaderObject = CreateShader(shaderType);
 
