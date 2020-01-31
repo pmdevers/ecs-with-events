@@ -43,7 +43,7 @@ namespace Game.Glfw
             if (funcPtr == IntPtr.Zero)
             {
                 Console.WriteLine($"Unable to load Function Pointer: {typeof(T).Name}");
-                return default(T);
+                return default;
             }
             return Marshal.GetDelegateForFunctionPointer<T>(funcPtr);
         }

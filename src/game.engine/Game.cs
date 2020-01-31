@@ -29,13 +29,10 @@ namespace Game.Engine
         float[] vertices =
             {
             
-                -1.0f, -1.0f, 0.0f,
-                1.0f, -1.0f, 0.0f,
-                0.0f, 1.0f, 0.0f,
+                -0.5f, -0.5f, 0.0f,
+                0.5f, -0.5f, 0.0f,
+                0.0f, 0.5f, 0.0f,
             };
-
-        uint[] _vertexArray, _vertexBuffer, _indexBuffer;
-
 
         public Game()
         {
@@ -45,46 +42,42 @@ namespace Game.Engine
             Window = new Window(1024, 786, "Game.Engine");
             Window.Init();
 
-            var vertexShader =  
-@"#version 430 
+            var vertexShader =  @"
+                #version 430 
  
-layout(location = 0) in vec3 a_position; 
+                layout(location = 0) in vec3 a_position; 
 
-void main() { 
-	gl_Position = vec4(a_position, 1.0); 
-}
-";
+                out vec3 v_position;
 
-            var fragmentShader = @" 
+                void main() { 
+                    v_position = a_position;
+	                gl_Position = vec4(a_position, 1.0); 
+                }
+            ";
+
+            var fragmentShader = @"
+                #version 430
  
-out vec4 fcolor; 
+                layout(location = 0) out vec4 color;
+
+                in vec3 v_position;
  
-void main() 
-{ 
-fcolor = vec4(1.0, 0.0, 0.0, 1.0); 
-}
-";
+                void main() 
+                { 
+                    color = vec4(v_position * 0.5 + 0.5, 1.0); 
+                }
+            ";
 
             shader = new ShaderProgram(vertexShader, fragmentShader, null);
             shader.Bind();
 
+
             _vao = new VertexBufferArray();
             _vao.Bind();
 
-            _vbo = new VertexBuffer();
-            _vbo.Bind();
-            _vbo.SetData(0, vertices, false, 3);
+                            
+            // VERTEXBUFFER
             
-            short[] indeces = { 0, 1, 3 };
-            _ibo = new IndexBuffer();
-            _ibo.Bind();
-            _ibo.SetData(indeces);
-            //_vertexArray = new uint[] { 0 };
-            //GenVertexArrays(1, _vertexArray);
-            //BindVertexArray(_vertexArray[0]);
-
-            //var vertexBuffer = new VertexBuffer(vertices);
-
             //_vertexBuffer = new uint[] { 0 };
             //GenBuffers(1, _vertexBuffer);
             //BindBuffer(ARRAY_BUFFER, _vertexBuffer[0]);
@@ -93,21 +86,28 @@ fcolor = vec4(1.0, 0.0, 0.0, 1.0);
             //Marshal.Copy(vertices, 0, p, vertices.Length);
             //BufferData(ARRAY_BUFFER, vertices.Length * sizeof(float), p, STATIC_DRAW);
             //Marshal.FreeHGlobal(p);
-            
             //EnableVertexAttribArray(0);
-            
+
+            _vbo = new VertexBuffer();
+            _vbo.Bind();
+            _vbo.SetData(0, vertices, false, 3);
+
+            // INDEXBUFFER
+
             //_indexBuffer = new uint[] { 0 };
+
             //GenBuffers(1, _indexBuffer);
             //BindBuffer(ELEMENT_ARRAY_BUFFER, _indexBuffer[0]);
-
-            
-            ////var indexBuffer = new IndexBuffer(indeces);
-
+            //var indeces = new uint[] { 0, 1, 2, 3 };
             //GCHandle indecHandle = GCHandle.Alloc(indeces, GCHandleType.Pinned);
             //IntPtr indecPtr = indecHandle.AddrOfPinnedObject();
             //BufferData(ELEMENT_ARRAY_BUFFER, sizeof(uint) * indeces.Length, indecPtr, STATIC_DRAW);
 
             //indecHandle.Free();
+
+            _ibo = new IndexBuffer();
+            _ibo.Bind();
+            _ibo.SetData(new int[] { 0, 1, 2, 3 });
 
             EventManager.RegisterListener<CloseWindowEvent>(WindowClosed);
         }
@@ -136,9 +136,7 @@ fcolor = vec4(1.0, 0.0, 0.0, 1.0);
                 Clear(COLOR_BUFFER_BIT);
 
                 _vao.Bind();
-                //BindVertexArray(_vertexArray[0]);
-                //VertexAttribPointer(0, 3, FLOAT, false, 0, IntPtr.Zero);
-                ////DrawArrays(TRIANGLES, 0, 3);
+                VertexAttribPointer(0, 3, FLOAT, false, 0, IntPtr.Zero);
 
                 DrawElements(TRIANGLES, 3, UNSIGNED_INT, IntPtr.Zero);
 

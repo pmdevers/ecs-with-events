@@ -21,11 +21,11 @@ namespace Game.Engine.Graphics.OpenGL
         public uint IndexBufferObject => _bufferObject;
         public bool IsCreated() { return _bufferObject != 0; }
 
-        public void SetData(short[] data)
+        public void SetData(int[] data)
         {
-            IntPtr p = Marshal.AllocHGlobal(data.Length * sizeof(float));
+            IntPtr p = Marshal.AllocHGlobal(data.Length * sizeof(int));
             Marshal.Copy(data, 0, p, data.Length);
-            BufferData(ELEMENT_ARRAY_BUFFER, data.Length * sizeof(short), p, STATIC_DRAW);
+            BufferData(ELEMENT_ARRAY_BUFFER, data.Length * sizeof(int), p, STATIC_DRAW);
             Marshal.FreeHGlobal(p);
         }
 
