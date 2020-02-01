@@ -20,7 +20,7 @@ namespace Game.Cli
         {
             var levensloop = new Engine.Game();
 
-            levensloop.Registery.Register(new WriteToConsoleSystem());
+            //levensloop.Registery.Register(new WriteToConsoleSystem());
 
             levensloop.EntityLoader.LoadJson(File.ReadAllText("entity.json"));
 

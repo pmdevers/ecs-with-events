@@ -7,15 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Components\**" />
-    <Compile Remove="Serialization\**" />
-    <EmbeddedResource Remove="Components\**" />
-    <EmbeddedResource Remove="Serialization\**" />
-    <None Remove="Components\**" />
-    <None Remove="Serialization\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\..\lib\glfw3.dll" Link="glfw3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

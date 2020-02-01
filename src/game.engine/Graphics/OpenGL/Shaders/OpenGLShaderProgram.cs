@@ -86,5 +86,11 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
 
             return info.ToString();
         }
+
+        public override void UploadUniformMatrix(string name, Matrix4 matrix)
+        {
+            var location = GetUniformLocation(_shaderProgramObject, name);
+            UniformMatrix4Fv(location, 1, false, matrix.ToArray());
+        }
     }
 }

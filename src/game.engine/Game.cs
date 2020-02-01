@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 using Game.Engine.EntityComponentSystem;
 using Game.Engine.Events;
 using Game.Engine.EventSystem;
 using Game.Engine.Graphics;
-using Game.Engine.Graphics.OpenGL;
-using Game.Engine.Graphics.OpenGL.Shaders;
 using Game.Engine.Renderer;
 using Game.Engine.Systems;
-using Game.Engine.Tools;
 
-using static Game.Glfw.GL;
 
 namespace Game.Engine
 {
@@ -36,12 +31,15 @@ namespace Game.Engine
             Window = new Window(1024, 786, "Game.Engine");
             Window.Init();
             Renderer = RendererAPI.GetAPI();
+            Camera = new OrthogaphicCamera(-2.0f, 2.0f, -2.0f, 2.0f);
 
-            var vertexShader =  @"
+            var vertexShader = @"
                 #version 430 
  
                 layout(location = 0) in vec3 a_position; 
                 layout(location = 1) in vec4 a_color;
+
+                uniform mat4 v_ViewProjection;
 
                 out vec3 v_position;
                 out vec4 v_color;
@@ -49,7 +47,7 @@ namespace Game.Engine
                 void main() { 
                     v_position = a_position;
                     v_color = a_color;
-	                gl_Position = vec4(a_position, 1.0); 
+	                gl_Position = v_ViewProjection * vec4(a_position, 1.0); 
                 }
             ";
 
@@ -117,11 +115,13 @@ namespace Game.Engine
  
                 layout(location = 0) in vec3 a_position; 
 
+                uniform mat4 v_ViewProjection;
+
                 out vec3 v_position;
 
                 void main() { 
                     v_position = a_position;
-	                gl_Position = vec4(a_position, 1.0); 
+                    gl_Position = v_ViewProjection * vec4(a_position, 1.0); 
                 }
             ";
 
@@ -130,7 +130,6 @@ namespace Game.Engine
  
                 layout(location = 0) out vec4 color;
 
-                in vec3 v_position;
                 in vec4 v_color;
 
                 void main() 
@@ -148,6 +147,7 @@ namespace Game.Engine
         public ISystemRegistery Registery { get; }
         public IEntityRegistery EntityRegistery { get; }
         public EntityLoader EntityLoader { get; }
+        public OrthogaphicCamera Camera { get; }
         public Window Window { get; }
         public IRenderAPI Renderer { get; }
 
@@ -169,13 +169,18 @@ namespace Game.Engine
             {
                 RenderCommand.SetClearColor(0.1f, 0.1f, 0.1f, 1.0f);
                 RenderCommand.Clear();
+
+                Camera.Position = new Vector3(Camera.Position.x + 0.001f, Camera.Position.y, Camera.Position.z);
                 
                 Render.BeginScene();
 
                 _blue_shader.Bind();
+                _blue_shader.UploadUniformMatrix("v_ViewProjection", Camera.ViewProjectionMatrix);
                 Render.Submit(_Square_va);
                 
                 shader.Bind();
+                shader.UploadUniformMatrix("v_ViewProjection", Camera.ViewProjectionMatrix);
+
                 Render.Submit(_vao);
 
                 Render.EndScene();

@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Math\**" />
+    <EmbeddedResource Remove="Math\**" />
+    <None Remove="Math\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="GL.Constants.cs" />
   </ItemGroup>
 

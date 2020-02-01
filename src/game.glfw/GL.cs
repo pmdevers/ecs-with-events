@@ -36,6 +36,8 @@ namespace Game.Glfw
         public static glGetProgramInfoLog GetProgramInfoLog;
         public static glUseProgram UseProgram;
         public static glDetachShader DetachShader;
+        public static glUniformMatrix4fv UniformMatrix4Fv;
+        public static glGetUniformLocation GetUniformLocation;
 
         private static T GetMethod<T>()
         {
@@ -80,6 +82,8 @@ namespace Game.Glfw
             GetProgramInfoLog = GetMethod<glGetProgramInfoLog>();
             DetachShader = GetMethod<glDetachShader>();
             UseProgram = GetMethod<glUseProgram>();
+            UniformMatrix4Fv = GetMethod<glUniformMatrix4fv>();
+            GetUniformLocation = GetMethod<glGetUniformLocation>();
         }
         
     }

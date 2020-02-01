@@ -82,7 +82,9 @@ namespace Game.Glfw
         public delegate void glGetShaderiv(uint shader, uint pname, int[] _params);
         public delegate void glGetShaderInfoLog(uint shader, int maxLength, IntPtr length, StringBuilder infoLog);
         public delegate void glDeleteShader(uint shader);
-        
+        public delegate void glUniformMatrix4fv(int location, int count, bool transpose, float[] value);
+        public delegate int glGetUniformLocation(uint program, string name);
+
 
         public delegate void glLinkProgram(uint program);
         public delegate void glGetProgramiv(uint program, uint pname, int[] _params);
