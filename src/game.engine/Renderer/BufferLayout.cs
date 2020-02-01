@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Game.Engine.Renderer
@@ -83,9 +84,10 @@ namespace Game.Engine.Renderer
     public class BufferLayout
     {
         private int _stride = 0;
-        public BufferLayout(BufferElement[] elements)
+        public BufferLayout(Dictionary<string, ShaderDataType> elements)
         {
-            Elements = elements;
+
+            Elements = elements.Select(x => new BufferElement(x.Value, x.Key, false)).ToArray(); 
             CalculateOffsetAndStride();
         }
 
@@ -107,5 +109,7 @@ namespace Game.Engine.Renderer
         }
 
         public BufferElement[] Elements { get; }
+
+       
     }
 }

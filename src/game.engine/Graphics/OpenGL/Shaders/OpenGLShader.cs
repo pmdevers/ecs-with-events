@@ -7,7 +7,7 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
 {
     public class OpenGLShader
     {
-        private uint _shaderObject;
+        private readonly uint _shaderObject;
         public OpenGLShader(uint shaderType, string source)
         {
             _shaderObject = CreateShader(shaderType);

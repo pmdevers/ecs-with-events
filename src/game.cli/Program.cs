@@ -22,7 +22,8 @@ namespace Game.Cli
 
             //levensloop.Registery.Register(new WriteToConsoleSystem());
 
-            levensloop.EntityLoader.LoadJson(File.ReadAllText("entity.json"));
+            levensloop.EntityLoader.LoadJson(File.ReadAllText("square.json"));
+            levensloop.EntityLoader.LoadJson(File.ReadAllText("triangle.json"));
 
             levensloop.Run();
 

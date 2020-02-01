@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Game.Engine
 {
@@ -17,9 +18,13 @@ namespace Game.Engine
 
         private readonly IDictionary<string, Type> _cachedTypes;
         private readonly IEntityRegistery _registery;
+        private readonly JsonSerializerOptions _options;
 
         public EntityLoader(IEntityRegistery registery)
         {
+            _options = new JsonSerializerOptions();
+            _options.Converters.Add(new JsonStringEnumConverter());
+
             var type = typeof(IComponent);
             _cachedTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
@@ -30,14 +35,15 @@ namespace Game.Engine
 
         public void LoadJson(string json)
         {
-            var obj = JsonSerializer.Deserialize<Entity>(json);
+            
+            var obj = JsonSerializer.Deserialize<Entity>(json, _options);
             var entity = _registery.Create(obj.Id);
 
             foreach (var c in obj.Components)       
             {
                 if (_cachedTypes.ContainsKey(c.Key))
                 {
-                   var component =  (IComponent)JsonSerializer.Deserialize(c.Value.ToString(), _cachedTypes[c.Key]);
+                   var component =  (IComponent)JsonSerializer.Deserialize(c.Value.ToString(), _cachedTypes[c.Key], _options);
                    entity.AddComponent(component);
                 }
             }

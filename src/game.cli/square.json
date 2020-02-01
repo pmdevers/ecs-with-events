@@ -1,0 +1,27 @@
+{
+  "Id": "Square",
+  "Components": {
+    "Render": {
+      "VertexShader": "#version 430 \n layout(location = 0) in vec3 a_position; \n uniform mat4 v_ViewProjection; \n out vec3 v_position; \n  void main() { \n v_position = a_position; \n gl_Position = v_ViewProjection * vec4(a_position, 1.0); \n}",
+      "FragmentShader": "#version 430\n \nlayout(location = 0) out vec4 color;\n\nin vec4 v_color;\n\nvoid main() \n{ \n    color = vec4(0.2, 0.3, 0.8, 1.0); \n}",
+      "Verteces": [
+        -0.75,
+        -0.75,
+        0.0,
+        0.75,
+        -0.75,
+        0.0,
+        0.75,
+        0.75,
+        0.0,
+        -0.75,
+        0.75,
+        0.0
+      ],
+      "BufferLayout": {
+          "a_Position": "Float3"
+      },
+      "Indecies": [ 0, 1, 2, 2, 3, 0 ]
+    }
+  }
+}

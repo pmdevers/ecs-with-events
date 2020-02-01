@@ -9,7 +9,7 @@ namespace Game.Engine.Graphics.OpenGL
 {
     public class OpenGLVertexArray : VertexArray
     {
-        private List<VertexBuffer> _vertexBuffers = new List<VertexBuffer>();
+        private readonly List<VertexBuffer> _vertexBuffers = new List<VertexBuffer>();
         private IndexBuffer _indexBuffer;
         private readonly uint _vertexArrayObject;
         public OpenGLVertexArray()
