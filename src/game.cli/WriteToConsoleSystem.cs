@@ -1,9 +1,12 @@
 ﻿using System;
 
 using Game.Engine;
+using Game.Engine.EntityComponentSystem;
 using Game.Engine.Events;
 using Game.Engine.EventSystem;
+using Game.Engine.Input;
 using Game.Engine.Systems;
+using Game.Engine.Systems.Position;
 
 namespace Game.Cli
 {
@@ -12,7 +15,7 @@ namespace Game.Cli
         public WriteToConsoleSystem()
         {
             Game.Engine.Game.EventManager.RegisterListener<KeyPressedEvent>(HandleKeyPress);
-            Game.Engine.Game.EventManager.RegisterListener<MouseMovedEvent>(HandleMouseMove);
+            //Game.Engine.Game.EventManager.RegisterListener<MouseMovedEvent>(HandleMouseMove);
         }
 
         private void HandleMouseMove(Event e)
@@ -33,14 +36,31 @@ namespace Game.Cli
 
         public override void Update(TimeSpan gameTime)
         {
-            foreach(var e in GetAllEntities())
+            if (Input.IsKeyPressed(65))
             {
-                //Console.WriteLine(e.Name);
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().X -= 0.01f;
+            }
+            else if (Input.IsKeyPressed(68))
+            {
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().X += 0.01f;
+            }
 
-                foreach(var c in Registery.GetComponents(e))
-                {
-                  //  Console.WriteLine(c.ToString());
-                }
+            if (Input.IsKeyPressed(87))
+            {
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().Y += 0.01f;
+            }
+            else if (Input.IsKeyPressed(83))
+            {
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().Y -= 0.01f;
+            }
+
+            if (Input.IsKeyPressed(61))
+            {
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().Z += 0.01f;
+            }
+            else if (Input.IsKeyPressed(45))
+            {
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().Z -= 0.01f;
             }
         }
     }

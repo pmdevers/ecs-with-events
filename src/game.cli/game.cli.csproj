@@ -11,6 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="camera.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="triangle.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

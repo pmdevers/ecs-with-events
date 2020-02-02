@@ -3,12 +3,15 @@ using System.Collections.Generic;
 
 using Game.Engine.EntityComponentSystem;
 using Game.Engine.EventSystem;
+using Game.Engine.Input;
 
 namespace Game.Engine.Systems
 {
     public class EntitySystem : ISystem
     {
         public IEntityRegistery Registery { get; set; }
+        public InputManager Input { get; set; }
+
         public virtual void Update(TimeSpan gameTime)
         {
         }
@@ -21,11 +24,6 @@ namespace Game.Engine.Systems
         public IEnumerable<IEntityRecord> GetAllEntities()
         {
             return Registery.All();
-        }
-
-        public virtual void Init(IEntityRegistery registery)
-        {
-            Registery = registery;
         }
     }
 }

@@ -8,14 +8,13 @@ namespace Game.Engine.Renderer
     {
         private static Matrix4 _viewProjectionMatrix;
 
-        public static void BeginScene(OrthogaphicCamera camera)
+        public static void BeginScene(Matrix4 viewProjectionMatrix)
         {
-            _viewProjectionMatrix = camera.ViewProjectionMatrix;
+            _viewProjectionMatrix = viewProjectionMatrix;
         }
 
         public static void EndScene()
         {
-
         }
 
         public static void Submit(ShaderProgram shader, VertexArray vertexArray)
@@ -25,6 +24,5 @@ namespace Game.Engine.Renderer
             vertexArray.Bind();
             RenderCommand.DrawIndexed(vertexArray);
         }
-
     }
 }

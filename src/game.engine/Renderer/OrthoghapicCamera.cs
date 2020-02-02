@@ -4,11 +4,12 @@ using System.Text;
 
 namespace Game.Engine.Renderer
 {
-    public class OrthogaphicCamera
+    public class OrthographicCamera : ICamera
     {
         private Vector3 _position;
         private float _rotation;
-        public OrthogaphicCamera(float left, float right, float bottom, float top)
+
+        public OrthographicCamera(float left, float right, float bottom, float top)
         {
             ProjectionMatrix = Math1.Ortho(left, right, bottom, top, -1.0f, 1.0f);
             ViewMatrix = Matrix4.Identity();
@@ -28,6 +29,7 @@ namespace Game.Engine.Renderer
                 RecalculateViewMatrix();
             }
         }
+
         public float Rotation
         {
             get => _rotation;
@@ -40,12 +42,6 @@ namespace Game.Engine.Renderer
 
         private void RecalculateViewMatrix()
         {
-            var transform = Math1.Translate(Matrix4.Identity(), _position)
-                * Math1.Rotate(Matrix4.Identity(), Math1.Radians(_rotation), new Vector3(0, 0, 1));
-
-            ViewMatrix = transform.Inverse();
-            ViewProjectionMatrix = ProjectionMatrix * ViewMatrix;
-
         }
     }
 }
