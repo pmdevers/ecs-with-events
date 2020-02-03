@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Game.Engine
+﻿namespace Game.Engine
 {
     public static partial class Math1
     {
@@ -13,7 +9,6 @@ namespace Game.Engine
 
         public static float Acosh(float x)
         {
-
             if (x < (1f))
                 return (0f);
             return (float)System.Math.Log(x + System.Math.Sqrt(x * x - (1f)));

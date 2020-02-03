@@ -12,6 +12,7 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
         private uint _shaderProgramObject;
         private readonly OpenGLShader _vertexShader;
         private readonly OpenGLShader _fragmentShader;
+
         public OpenGLShaderProgram(string vertexShaderSource, string fragmentShaderSource,
             Dictionary<uint, string> attributeLocations)
         {
@@ -28,8 +29,6 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
                 foreach (var vertexAttributeLocation in attributeLocations)
                 {
                     // TODO: glBindAttributeLocation
-
-
                 }
             }
 
@@ -43,7 +42,6 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
 
             Bind();
         }
-
 
         public override void Delete()
         {
@@ -67,13 +65,14 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
         }
 
         public uint ShaderProgramObject => _shaderProgramObject;
-        
+
         public bool GetLinkStatus()
         {
             var p = new[] { 0 };
             GetProgramiv(_shaderProgramObject, LINK_STATUS, p);
             return p[0] == 1;
         }
+
         public string GetInfoLog()
         {
             var infoLenght = new[] { 0 };

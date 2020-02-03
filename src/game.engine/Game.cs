@@ -1,13 +1,11 @@
-﻿using System;
-
-using Game.Engine.EntityComponentSystem;
+﻿using Game.Engine.EntityComponentSystem;
 using Game.Engine.Events;
 using Game.Engine.EventSystem;
 using Game.Engine.Graphics;
 using Game.Engine.Input;
-using Game.Engine.Renderer;
 using Game.Engine.Systems;
 using Game.Engine.Systems.Camera;
+using System;
 
 namespace Game.Engine
 {
@@ -19,12 +17,14 @@ namespace Game.Engine
 
         public Game()
         {
+            Instance = this;
             Registery = new SystemRegistery();
             EntityRegistery = new EntityRegistery();
             EntityLoader = new EntityLoader(EntityRegistery);
             Window = Window.Create(1280, 720, "Game.Engine");
             Window.Init();
-            Input = InputManager.Create(Window);
+            Window.EnableVsync(true);
+            Input = InputManager.Create();
 
             Registery.Register(new CameraSystem());
             Registery.Register(new RenderSystem());
@@ -37,6 +37,8 @@ namespace Game.Engine
         public EntityLoader EntityLoader { get; }
         public Window Window { get; }
         public InputManager Input { get; }
+
+        public static Game Instance { get; private set; }
 
         public void Run()
         {

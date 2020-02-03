@@ -23,7 +23,9 @@ namespace Game.Engine.Renderer
         public abstract void UploadUniformMatrix(string name, Matrix4 matrix);
 
         public abstract void Delete();
+
         public abstract void Bind();
+
         public abstract void Unbind();
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Game.Engine.Graphics.OpenGL;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Game.Engine.Renderer
 {
@@ -21,11 +19,17 @@ namespace Game.Engine.Renderer
         }
 
         public abstract void AddVertexBuffer(VertexBuffer vertexBuffer);
+
         public abstract VertexBuffer[] GetVertexBuffers();
+
         public abstract IndexBuffer GetIndexBuffer();
+
         public abstract void SetIndexBuffer(IndexBuffer vertexBuffer);
+
         public abstract void Delete();
+
         public abstract void Bind();
+
         public abstract void Unbind();
     }
 }

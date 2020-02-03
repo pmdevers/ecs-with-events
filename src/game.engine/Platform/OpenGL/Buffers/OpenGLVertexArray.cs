@@ -1,7 +1,6 @@
 ﻿using Game.Engine.Renderer;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 using static Game.Glfw.GL;
 
@@ -12,6 +11,7 @@ namespace Game.Engine.Graphics.OpenGL
         private readonly List<VertexBuffer> _vertexBuffers = new List<VertexBuffer>();
         private IndexBuffer _indexBuffer;
         private readonly uint _vertexArrayObject;
+
         public OpenGLVertexArray()
         {
             var ids = new uint[1];
@@ -21,11 +21,11 @@ namespace Game.Engine.Graphics.OpenGL
             Bind();
         }
 
-        public uint VertexArrayObject => _vertexArrayObject; 
+        public uint VertexArrayObject => _vertexArrayObject;
 
         public override void Delete()
         {
-            DeleteVertexArrays(1, new [] { _vertexArrayObject });
+            DeleteVertexArrays(1, new[] { _vertexArrayObject });
         }
 
         public override void Bind()
@@ -40,7 +40,7 @@ namespace Game.Engine.Graphics.OpenGL
 
         public override void AddVertexBuffer(VertexBuffer vertexBuffer)
         {
-            if(vertexBuffer.BufferLayout == null)
+            if (vertexBuffer.BufferLayout == null)
             {
                 Console.WriteLine("BufferLayout Not set");
             }

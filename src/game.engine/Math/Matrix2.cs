@@ -70,7 +70,7 @@ namespace Game.Engine
             };
         }
 
-        #endregion
+        #endregion Construction
 
         #region Index Access
 
@@ -105,7 +105,7 @@ namespace Game.Engine
             set { cols[column][row] = value; }
         }
 
-        #endregion
+        #endregion Index Access
 
         #region Conversion
 
@@ -118,7 +118,7 @@ namespace Game.Engine
             return cols.SelectMany(v => v.ToArray()).ToArray();
         }
 
-        #endregion
+        #endregion Conversion
 
         #region Multiplication
 
@@ -160,7 +160,7 @@ namespace Game.Engine
             });
         }
 
-        #endregion
+        #endregion Multiplication
 
         #region ToString support
 
@@ -173,9 +173,10 @@ namespace Game.Engine
             );
         }
 
-        #endregion
+        #endregion ToString support
 
         #region comparision
+
         /// <summary>
         /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
         /// The Difference is detected by the different values
@@ -195,6 +196,7 @@ namespace Game.Engine
 
             return false;
         }
+
         /// <summary>
         /// Implements the operator ==.
         /// </summary>
@@ -225,14 +227,14 @@ namespace Game.Engine
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
             return this[0].GetHashCode() ^ this[1].GetHashCode();
         }
 
-        #endregion
+        #endregion comparision
 
         /// <summary>
         /// The columms of the matrix.

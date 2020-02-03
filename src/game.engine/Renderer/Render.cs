@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Game.Engine.Renderer
+﻿namespace Game.Engine.Renderer
 {
     public static class Render
     {

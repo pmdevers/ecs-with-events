@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Game.Engine.Renderer
 {
     public enum ShaderDataType : int
     {
-        None = 0, 
-        Float, 
-        Float2, 
-        Float3 ,
-        Float4 ,
+        None = 0,
+        Float,
+        Float2,
+        Float3,
+        Float4,
         Mat3,
-        Mat4, 
-        Int ,
-        Int2 , 
-        Int3 ,
-        Int4 , 
-        Bool  
-
+        Mat4,
+        Int,
+        Int2,
+        Int3,
+        Int4,
+        Bool
     }
-    
+
     public class BufferElement
     {
         public string Name;
@@ -30,7 +26,6 @@ namespace Game.Engine.Renderer
         public int Size;
         public bool Normalized;
         public int Offset;
-        
 
         public BufferElement(ShaderDataType type, string name, bool normalized = false)
         {
@@ -84,10 +79,10 @@ namespace Game.Engine.Renderer
     public class BufferLayout
     {
         private int _stride = 0;
+
         public BufferLayout(Dictionary<string, ShaderDataType> elements)
         {
-
-            Elements = elements.Select(x => new BufferElement(x.Value, x.Key, false)).ToArray(); 
+            Elements = elements.Select(x => new BufferElement(x.Value, x.Key, false)).ToArray();
             CalculateOffsetAndStride();
         }
 
@@ -109,7 +104,5 @@ namespace Game.Engine.Renderer
         }
 
         public BufferElement[] Elements { get; }
-
-       
     }
 }

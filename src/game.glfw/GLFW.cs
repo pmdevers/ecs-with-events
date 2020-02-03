@@ -51,6 +51,8 @@ namespace Game.Glfw
 
         [DllImport(GLFW_DLL, EntryPoint = "glfwGetKey")] public static extern bool GetKey(IntPtr window, int key);
 
+        [DllImport(GLFW_DLL, EntryPoint = "glfwSwapInterval")] public static extern void SwapInterval(int enabled);
+
         public delegate void GLFWwindowsizefun(IntPtr window, int width, int height);
 
         public delegate void GLFWwindowclosefun(IntPtr window);

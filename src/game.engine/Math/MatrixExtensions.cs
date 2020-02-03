@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Game.Engine
+﻿namespace Game.Engine
 {
     public static class MatrixExtensions
     {
         public static Matrix2 Inverse(this Matrix2 m)
         {
-
             float OneOverDeterminant = (1f) / (
                 +m[0][0] * m[1][1]
                 - m[1][0] * m[0][1]);
@@ -41,8 +36,8 @@ namespace Game.Engine
             Inverse[2, 2] = +(m[0][0] * m[1][1] - m[1][0] * m[0][1]) * OneOverDeterminant;
 
             return Inverse;
-
         }
+
         public static Matrix4 Inverse(this Matrix4 m)
         {
             float Coef00 = m[2][2] * m[3][3] - m[3][2] * m[2][3];

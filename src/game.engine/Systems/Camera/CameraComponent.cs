@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Game.Engine;
-using Game.Engine.Renderer;
-
-namespace Game.Engine.Systems.Camera
+﻿namespace Game.Engine.Systems.Camera
 {
     public enum CameraType
     {

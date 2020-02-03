@@ -1,7 +1,5 @@
 ﻿using Game.Engine.Graphics.OpenGL;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Game.Engine.Renderer
 {
@@ -21,8 +19,11 @@ namespace Game.Engine.Renderer
         }
 
         public abstract int GetCount();
+
         public abstract bool IsCreated();
+
         public abstract void Bind();
+
         public abstract void Unbind();
     }
 }

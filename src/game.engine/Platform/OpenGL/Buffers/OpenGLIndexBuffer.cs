@@ -1,8 +1,6 @@
 ﻿using Game.Engine.Renderer;
 using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
 
 using static Game.Glfw.GL;
 
@@ -26,14 +24,16 @@ namespace Game.Engine.Graphics.OpenGL
         }
 
         public uint IndexBufferObject => _bufferObject;
-        public override bool IsCreated() { return _bufferObject != 0; }
+
+        public override bool IsCreated()
+        {
+            return _bufferObject != 0;
+        }
 
         public override int GetCount()
         {
             return _data.Length;
         }
-
-       
 
         public override void Bind()
         {

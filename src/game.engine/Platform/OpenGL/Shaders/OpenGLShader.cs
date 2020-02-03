@@ -8,6 +8,7 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
     public class OpenGLShader
     {
         private readonly uint _shaderObject;
+
         public OpenGLShader(uint shaderType, string source)
         {
             _shaderObject = CreateShader(shaderType);
@@ -24,7 +25,6 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
         }
 
         public uint ShaderObject => _shaderObject;
-        
 
         public void Delete()
         {

@@ -68,7 +68,7 @@ namespace Game.Engine
             };
         }
 
-        #endregion
+        #endregion Construction
 
         #region Index Access
 
@@ -103,7 +103,7 @@ namespace Game.Engine
             set { cols[column][row] = value; }
         }
 
-        #endregion
+        #endregion Index Access
 
         #region Conversion
 
@@ -128,7 +128,7 @@ namespace Game.Engine
             new Vector3(cols[2][0], cols[2][1], cols[2][2])});
         }
 
-        #endregion
+        #endregion Conversion
 
         #region Multiplication
 
@@ -176,7 +176,7 @@ namespace Game.Engine
             });
         }
 
-        #endregion
+        #endregion Multiplication
 
         #region ToString support
 
@@ -190,9 +190,11 @@ namespace Game.Engine
                 this[0, 3], this[1, 3], this[2, 3], this[3, 3]
             );
         }
-        #endregion
+
+        #endregion ToString support
 
         #region Comparision
+
         /// <summary>
         /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
         /// The Difference is detected by the different values
@@ -212,6 +214,7 @@ namespace Game.Engine
 
             return false;
         }
+
         /// <summary>
         /// Implements the operator ==.
         /// </summary>
@@ -242,13 +245,14 @@ namespace Game.Engine
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
             return this[0].GetHashCode() ^ this[1].GetHashCode() ^ this[2].GetHashCode() ^ this[3].GetHashCode();
         }
-        #endregion
+
+        #endregion Comparision
 
         /// <summary>
         /// The columms of the matrix.

@@ -1,7 +1,5 @@
 ﻿using Game.Engine.Renderer;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Game.Engine.Systems.Renderer
 {
@@ -9,19 +7,25 @@ namespace Game.Engine.Systems.Renderer
     {
         private VertexArray _va;
         private ShaderProgram _sp;
-        public VertexArray VertexArray { get
+
+        public VertexArray VertexArray
+        {
+            get
             {
                 _va = _va ?? Init();
                 return _va;
-            } 
+            }
         }
-        public ShaderProgram Shader { 
+
+        public ShaderProgram Shader
+        {
             get
             {
                 _sp = _sp ?? ShaderProgram.Create(VertexShader, FragmentShader, null);
                 return _sp;
-            } 
+            }
         }
+
         public string VertexShader { get; set; }
         public string FragmentShader { get; set; }
         public float[] Verteces { get; set; }

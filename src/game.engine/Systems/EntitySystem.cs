@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Game.Engine.EntityComponentSystem;
-using Game.Engine.EventSystem;
+﻿using Game.Engine.EntityComponentSystem;
 using Game.Engine.Input;
+using System;
+using System.Collections.Generic;
 
 namespace Game.Engine.Systems
 {

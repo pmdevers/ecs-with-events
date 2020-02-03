@@ -21,7 +21,7 @@ namespace Game.Engine.EventSystem
         {
             _newEvents.Add(e);
         }
-        
+
         public void RegisterListener(object eventType, EventDelegate callback)
         {
             if (eventType == null)
@@ -35,7 +35,7 @@ namespace Game.Engine.EventSystem
             else
                 _listeners[eventType] = callback;
         }
-        
+
         public void RemoveListener(object eventType, EventDelegate callback)
         {
             if (eventType == null)

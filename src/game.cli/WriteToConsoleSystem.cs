@@ -36,29 +36,29 @@ namespace Game.Cli
 
         public override void Update(TimeSpan gameTime)
         {
-            if (Input.IsKeyPressed(65))
+            if (InputManager.IsKeyPressed(65))
             {
                 Registery.FindByName("Camera").GetComponent<PositionComponent>().X -= 0.01f;
             }
-            else if (Input.IsKeyPressed(68))
+            else if (InputManager.IsKeyPressed(68))
             {
                 Registery.FindByName("Camera").GetComponent<PositionComponent>().X += 0.01f;
             }
 
-            if (Input.IsKeyPressed(87))
+            if (InputManager.IsKeyPressed(87))
             {
                 Registery.FindByName("Camera").GetComponent<PositionComponent>().Y += 0.01f;
             }
-            else if (Input.IsKeyPressed(83))
+            else if (InputManager.IsKeyPressed(83))
             {
                 Registery.FindByName("Camera").GetComponent<PositionComponent>().Y -= 0.01f;
             }
 
-            if (Input.IsKeyPressed(61))
+            if (InputManager.IsKeyPressed(61))
             {
                 Registery.FindByName("Camera").GetComponent<PositionComponent>().Z += 0.01f;
             }
-            else if (Input.IsKeyPressed(45))
+            else if (InputManager.IsKeyPressed(45))
             {
                 Registery.FindByName("Camera").GetComponent<PositionComponent>().Z -= 0.01f;
             }

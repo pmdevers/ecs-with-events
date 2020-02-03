@@ -1,9 +1,7 @@
-﻿using System;
-
-using Game.Engine.Events;
+﻿using Game.Engine.Events;
 using Game.Engine.EventSystem;
 using Game.Engine.Input;
-
+using System;
 using static Game.Glfw.GLFW;
 
 namespace Game.Engine.Graphics
@@ -121,6 +119,11 @@ namespace Game.Engine.Graphics
         {
             DestroyWindow(WindowHandle);
             Terminate();
+        }
+
+        public override void EnableVsync(bool enabled)
+        {
+            SwapInterval(enabled ? 1 : 0);
         }
     }
 }

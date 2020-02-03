@@ -2,9 +2,7 @@
 using Game.Engine.Systems.Camera;
 using Game.Engine.Systems.Renderer;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Game.Engine.Systems
 {

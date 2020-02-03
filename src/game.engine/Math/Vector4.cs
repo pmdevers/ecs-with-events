@@ -124,6 +124,7 @@ namespace Game.Engine
 
             return false;
         }
+
         /// <summary>
         /// Implements the operator ==.
         /// </summary>
@@ -154,14 +155,14 @@ namespace Game.Engine
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
             return this.x.GetHashCode() ^ this.y.GetHashCode() ^ this.z.GetHashCode() ^ this.w.GetHashCode();
         }
 
-        #endregion
+        #endregion Comparision
 
         #region ToString support
 
@@ -170,6 +171,6 @@ namespace Game.Engine
             return String.Format("[{0}, {1}, {2}, {3}]", x, y, z, w);
         }
 
-        #endregion
+        #endregion ToString support
     }
 }

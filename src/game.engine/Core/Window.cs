@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Game.Engine.Graphics
+﻿namespace Game.Engine.Graphics
 {
     public abstract class Window
     {
@@ -12,6 +8,8 @@ namespace Game.Engine.Graphics
         }
 
         public abstract void Init();
+
+        public abstract void EnableVsync(bool enabled);
 
         public abstract void Update();
     }

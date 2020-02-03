@@ -1,9 +1,4 @@
-﻿using Game.Engine.Renderer;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Game.Engine.Renderer
+﻿namespace Game.Engine.Renderer
 {
     public class RenderCommand
     {

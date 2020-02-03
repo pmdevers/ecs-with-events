@@ -1,7 +1,5 @@
-﻿using System;
-
-using Game.Glfw;
-
+﻿using Game.Glfw;
+using System;
 using static Game.Glfw.GL;
 
 namespace Game.Engine.Graphics

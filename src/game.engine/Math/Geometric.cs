@@ -18,31 +18,31 @@ namespace Game.Engine
             return tmp.x + tmp.y;
         }
 
-        public static float Dot( Vector3 x, Vector3 y)
+        public static float Dot(Vector3 x, Vector3 y)
         {
             Vector3 tmp = new Vector3(x * y);
             return tmp.x + tmp.y + tmp.z;
         }
 
-        public static float Dot( Vector4 x, Vector4 y)
+        public static float Dot(Vector4 x, Vector4 y)
         {
             Vector4 tmp = new Vector4(x * y);
             return (tmp.x + tmp.y) + (tmp.z + tmp.w);
         }
 
-        public static Vector2 Normalize( Vector2 v)
+        public static Vector2 Normalize(Vector2 v)
         {
             float sqr = v.x * v.x + v.y * v.y;
             return v * (1.0f / (float)Math.Sqrt(sqr));
         }
 
-        public static Vector3 Normalize( Vector3 v)
+        public static Vector3 Normalize(Vector3 v)
         {
             float sqr = v.x * v.x + v.y * v.y + v.z * v.z;
             return v * (1.0f / (float)Math.Sqrt(sqr));
         }
 
-        public static Vector4 Normalize( Vector4 v)
+        public static Vector4 Normalize(Vector4 v)
         {
             float sqr = v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w;
             return v * (1.0f / (float)Math.Sqrt(sqr));

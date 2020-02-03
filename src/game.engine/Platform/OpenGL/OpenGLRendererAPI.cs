@@ -1,8 +1,6 @@
 ﻿using Game.Engine.Renderer;
 using Game.Glfw;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Game.Engine.Graphics.OpenGL
 {
@@ -16,7 +14,6 @@ namespace Game.Engine.Graphics.OpenGL
         public void DrawIndexed(VertexArray vertexArray)
         {
             GL.DrawElements(GL.TRIANGLES, vertexArray.GetIndexBuffer().GetCount(), GL.UNSIGNED_INT, IntPtr.Zero);
-
         }
 
         public void SetClearColor(float red, float green, float blue, float alpha)

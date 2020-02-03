@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Game.Engine.Systems.Position
+﻿namespace Game.Engine.Systems.Position
 {
     public class PositionComponent : Component
     {
