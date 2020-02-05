@@ -106,7 +106,7 @@ namespace Game.Engine.Graphics
 
         public static void OnWindowResize(IntPtr window, int width, int height)
         {
-            Game.EventManager.QueueEvent(new CloseWindowEvent());
+            Game.EventManager.QueueEvent(new ResizeWindowEvent((float)width, (float)height));
         }
 
         public override void Update()

@@ -28,29 +28,29 @@ namespace Game.Cli
             var position = Registery.FindByName("Camera").GetComponent<PositionComponent>();
             if (InputManager.IsKeyPressed(KeyCode.A))
             {
-                position.X -= 0.5f * (float)gameTime;
+                position.X -= 0.1f * (float)gameTime;
             }
             else if (InputManager.IsKeyPressed(KeyCode.D))
             {
-                position.X += 0.5f * (float)gameTime;
+                position.X += 0.1f * (float)gameTime;
             }
 
             if (InputManager.IsKeyPressed(KeyCode.W))
             {
-                position.Y += 0.5f * (float)gameTime;
+                position.Y += 0.1f * (float)gameTime;
             }
             else if (InputManager.IsKeyPressed(KeyCode.S))
             {
-                position.Y -= 0.5f * (float)gameTime;
+                position.Y -= 0.1f * (float)gameTime;
             }
 
             if (InputManager.IsKeyPressed(KeyCode.Minus))
             {
-                position.Z += 0.5f * (float)gameTime;
+                position.Z += 0.1f * (float)gameTime;
             }
             else if (InputManager.IsKeyPressed(KeyCode.Equal))
             {
-                position.Z -= 0.5f * (float)gameTime;
+                position.Z -= 0.1f * (float)gameTime;
             }
         }
     }

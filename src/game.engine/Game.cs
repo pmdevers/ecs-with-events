@@ -59,8 +59,9 @@ namespace Game.Engine
 
             while (_isRunning)
             {
-                var gameTime = DateTime.Now - _previousGameTime;
-                _previousGameTime += gameTime;
+                var time = DateTime.Now;
+                var gameTime = time - _previousGameTime;
+                _previousGameTime = time;
 
                 EventManager.ProcessEvents();
 
