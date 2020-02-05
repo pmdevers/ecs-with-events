@@ -4,6 +4,6 @@ namespace Game.Engine
 {
     public interface ISystem
     {
-        void Update(TimeSpan gameTime);
+        void Update(GameTime gameTime);
     }
 }

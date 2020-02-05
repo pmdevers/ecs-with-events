@@ -62,14 +62,14 @@ namespace Game.Engine
                 var gameTime = DateTime.Now - _previousGameTime;
                 _previousGameTime += gameTime;
 
-                EventManager.ProcessEvents(gameTime);
+                EventManager.ProcessEvents();
 
                 var systemsEnumerator = Registery.GetEnumerator();
 
                 while (systemsEnumerator.MoveNext())
                 {
                     var system = systemsEnumerator.Current;
-                    system.Update(gameTime);
+                    system.Update(gameTime.TotalSeconds);
                 }
 
                 var cleanupEnumerator = Registery.GetEnumerator();

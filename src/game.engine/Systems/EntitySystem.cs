@@ -10,7 +10,7 @@ namespace Game.Engine.Systems
         public IEntityRegistery Registery { get; set; }
         public InputManager Input { get; set; }
 
-        public virtual void Update(TimeSpan gameTime)
+        public virtual void Update(GameTime gameTime)
         {
         }
 

@@ -11,7 +11,7 @@ namespace Game.Engine.Input
             return new GLFWInputManager();
         }
 
-        public static bool IsKeyPressed(int key)
+        public static bool IsKeyPressed(KeyCode key)
         {
             return _Instance.IsKeyPressedImpl(key);
         }
@@ -36,7 +36,7 @@ namespace Game.Engine.Input
             return _Instance.GetMouseYImpl();
         }
 
-        protected abstract bool IsKeyPressedImpl(int key);
+        protected abstract bool IsKeyPressedImpl(KeyCode key);
         protected abstract bool IsMouseButtonPressedImpl(int mouseButton);
         protected abstract Vector2 GetMousePositionImpl();
         protected abstract float GetMosueXImpl();

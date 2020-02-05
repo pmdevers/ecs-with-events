@@ -1,12 +1,7 @@
-﻿namespace Game.Engine.Events
-{
-    public class MouseCode
-    {
-        public MouseCode(int button)
-        {
-        }
-    }
+﻿using Game.Engine.Input;
 
+namespace Game.Engine.Events
+{
     public class MouseButtonPressedEvent
     {
         public MouseButtonPressedEvent(MouseCode mouseCode)
@@ -15,6 +10,11 @@
         }
 
         public MouseCode MouseCode { get; }
+
+        public override string ToString()
+        {
+            return $"The mouse button: '{MouseCode.ToString()}' was pressed";
+        }
     }
 
     public class MouseButtonReleasedEvent
@@ -25,5 +25,10 @@
         }
 
         public MouseCode MouseCode { get; }
+
+        public override string ToString()
+        {
+            return $"The mouse button: '{MouseCode.ToString()}' was released";
+        }
     }
 }

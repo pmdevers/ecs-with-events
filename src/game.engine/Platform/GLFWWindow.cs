@@ -63,13 +63,13 @@ namespace Game.Engine.Graphics
             {
                 case KeyActions.Press:
                     {
-                        Game.EventManager.QueueEvent(new MouseButtonPressedEvent(new MouseCode(button)));
+                        Game.EventManager.QueueEvent(new MouseButtonPressedEvent((MouseCode)button));
                         break;
                     }
 
                 case KeyActions.Release:
                     {
-                        Game.EventManager.QueueEvent(new MouseButtonReleasedEvent(new MouseCode(button)));
+                        Game.EventManager.QueueEvent(new MouseButtonReleasedEvent((MouseCode)button));
                         break;
                     }
             }
@@ -81,19 +81,19 @@ namespace Game.Engine.Graphics
             {
                 case KeyActions.Press:
                     {
-                        Game.EventManager.QueueEvent(new KeyPressedEvent(new KeyCode(key), 0));
+                        Game.EventManager.QueueEvent(new KeyPressedEvent((KeyCode)key, 0));
                         break;
                     }
 
                 case KeyActions.Release:
                     {
-                        Game.EventManager.QueueEvent(new KeyReleasedEvent(new KeyCode(key)));
+                        Game.EventManager.QueueEvent(new KeyReleasedEvent((KeyCode)key));
                         break;
                     }
 
                 case KeyActions.Repeat:
                     {
-                        Game.EventManager.QueueEvent(new KeyPressedEvent(new KeyCode(key), 1));
+                        Game.EventManager.QueueEvent(new KeyPressedEvent((KeyCode)key, 1));
                         break;
                     }
             }

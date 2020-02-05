@@ -14,53 +14,42 @@ namespace Game.Cli
     {
         public WriteToConsoleSystem()
         {
-            Game.Engine.Game.EventManager.RegisterListener<KeyPressedEvent>(HandleKeyPress);
-            //Game.Engine.Game.EventManager.RegisterListener<MouseMovedEvent>(HandleMouseMove);
+            Engine.Game.EventManager.RegisterListener<MouseButtonPressedEvent>(OutputEvent);
+            Engine.Game.EventManager.RegisterListener<KeyPressedEvent>(OutputEvent);
         }
 
-        private void HandleMouseMove(Event e)
+        private void OutputEvent(Event e)
         {
-            if (e.EventData is MouseMovedEvent mv)
-            {
-                Console.WriteLine($"Mouse X:'{mv.XPos}' - Y: '{mv.YPos}';");
-            }
+            Console.WriteLine(e.EventData.ToString());
         }
 
-        private void HandleKeyPress(Event e)
+        public override void Update(GameTime gameTime)
         {
-            if (e.EventData is KeyPressedEvent kp)
+            if (InputManager.IsKeyPressed(KeyCode.A))
             {
-                Console.WriteLine(kp.ToString());
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().X -= 0.5f * (float)gameTime;
             }
-        }
-
-        public override void Update(TimeSpan gameTime)
-        {
-            if (InputManager.IsKeyPressed(65))
+            else if (InputManager.IsKeyPressed(KeyCode.D))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().X -= 0.01f;
-            }
-            else if (InputManager.IsKeyPressed(68))
-            {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().X += 0.01f;
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().X += 0.5f * (float)gameTime;
             }
 
-            if (InputManager.IsKeyPressed(87))
+            if (InputManager.IsKeyPressed(KeyCode.W))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().Y += 0.01f;
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().Y += 0.5f * (float)gameTime;
             }
-            else if (InputManager.IsKeyPressed(83))
+            else if (InputManager.IsKeyPressed(KeyCode.S))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().Y -= 0.01f;
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().Y -= 0.5f * (float)gameTime;
             }
 
-            if (InputManager.IsKeyPressed(61))
+            if (InputManager.IsKeyPressed(KeyCode.Minus))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().Z += 0.01f;
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().Z += 0.5f * (float)gameTime;
             }
-            else if (InputManager.IsKeyPressed(45))
+            else if (InputManager.IsKeyPressed(KeyCode.Equal))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().Z -= 0.01f;
+                Registery.FindByName("Camera").GetComponent<PositionComponent>().Z -= 0.5f * (float)gameTime;
             }
         }
     }

@@ -10,5 +10,10 @@
             XOffset = xOffset;
             YOffset = yOffset;
         }
+
+        public override string ToString()
+        {
+            return $"Mouse scrolled: X: '{XOffset}' Y: '{YOffset}'.";
+        }
     }
 }

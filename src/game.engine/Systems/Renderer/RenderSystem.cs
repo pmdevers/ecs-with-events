@@ -17,7 +17,7 @@ namespace Game.Engine.Systems
         public IRenderAPI Renderer { get; private set; }
         public OrthographicCamera Camera { get; private set; }
 
-        public override void Update(TimeSpan gameTime)
+        public override void Update(GameTime gameTime)
         {
             var components = Registery.GetComponentsOf<RenderComponent>();
             var camera = Registery.GetComponentsOf<CameraComponent>().FirstOrDefault();

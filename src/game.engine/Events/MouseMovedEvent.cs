@@ -10,5 +10,10 @@
             XPos = xPos;
             YPos = yPos;
         }
+
+        public override string ToString()
+        {
+            return $"Mouse moved to x: '{XPos}' y: '{YPos}'.";
+        }
     }
 }

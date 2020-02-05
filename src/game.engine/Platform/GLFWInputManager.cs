@@ -12,9 +12,9 @@ namespace Game.Engine.Input
             _window = (GLFWWindow)Game.Instance.Window;
         }
 
-        protected override bool IsKeyPressedImpl(int key)
+        protected override bool IsKeyPressedImpl(KeyCode key)
         {
-            return GetKey(_window.WindowHandle, key);
+            return GetKey(_window.WindowHandle, (int)key);
         }
 
         protected override bool IsMouseButtonPressedImpl(int mouseButton)

@@ -15,7 +15,7 @@ namespace Game.Engine.Events
 
         public override string ToString()
         {
-            return $"The Key: '{KeyCode.Key}' was pressed";
+            return $"The Key: '{KeyCode.ToString()}' was pressed.";
         }
     }
 
@@ -27,5 +27,10 @@ namespace Game.Engine.Events
         }
 
         public KeyCode KeyCode { get; }
+
+        public override string ToString()
+        {
+            return $"The Key: '{KeyCode.ToString()}' was released.";
+        }
     }
 }

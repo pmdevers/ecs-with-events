@@ -47,7 +47,7 @@ namespace Game.Engine.EventSystem
                 _listeners[eventType] -= callback;
         }
 
-        public int ProcessEvents(TimeSpan gameTime)
+        public int ProcessEvents()
         {
             if (_isProcessing)
                 return 0;

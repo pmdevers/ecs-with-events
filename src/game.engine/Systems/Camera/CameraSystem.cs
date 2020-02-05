@@ -7,7 +7,7 @@ namespace Game.Engine.Systems.Camera
 {
     public class CameraSystem : EntitySystem
     {
-        public override void Update(TimeSpan gameTime)
+        public override void Update(GameTime gameTime)
         {
             var camera = Registery.GetComponentsOf<CameraComponent>().FirstOrDefault();
             var position = camera.Record.GetComponent<PositionComponent>();
