@@ -25,31 +25,32 @@ namespace Game.Cli
 
         public override void Update(GameTime gameTime)
         {
+            var position = Registery.FindByName("Camera").GetComponent<PositionComponent>();
             if (InputManager.IsKeyPressed(KeyCode.A))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().X -= 0.5f * (float)gameTime;
+                position.X -= 0.5f * (float)gameTime;
             }
             else if (InputManager.IsKeyPressed(KeyCode.D))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().X += 0.5f * (float)gameTime;
+                position.X += 0.5f * (float)gameTime;
             }
 
             if (InputManager.IsKeyPressed(KeyCode.W))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().Y += 0.5f * (float)gameTime;
+                position.Y += 0.5f * (float)gameTime;
             }
             else if (InputManager.IsKeyPressed(KeyCode.S))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().Y -= 0.5f * (float)gameTime;
+                position.Y -= 0.5f * (float)gameTime;
             }
 
             if (InputManager.IsKeyPressed(KeyCode.Minus))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().Z += 0.5f * (float)gameTime;
+                position.Z += 0.5f * (float)gameTime;
             }
             else if (InputManager.IsKeyPressed(KeyCode.Equal))
             {
-                Registery.FindByName("Camera").GetComponent<PositionComponent>().Z -= 0.5f * (float)gameTime;
+                position.Z -= 0.5f * (float)gameTime;
             }
         }
     }
