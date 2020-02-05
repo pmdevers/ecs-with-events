@@ -12,22 +12,21 @@ namespace Game.Engine.Systems.Renderer
         {
             get
             {
-                _va = _va ?? Init();
+                _va ??= Init();
                 return _va;
             }
         }
 
-        public ShaderProgram Shader
+        public ShaderProgram ShaderProgram
         {
             get
             {
-                _sp = _sp ?? ShaderProgram.Create(VertexShader, FragmentShader, null);
+                _sp ??= ShaderProgram.Create(Shader);
                 return _sp;
             }
         }
 
-        public string VertexShader { get; set; }
-        public string FragmentShader { get; set; }
+        public string Shader { get; set; }
         public float[] Verteces { get; set; }
         public int[] Indecies { get; set; }
         public Dictionary<string, ShaderDataType> BufferLayout { get; set; } = new Dictionary<string, ShaderDataType>();

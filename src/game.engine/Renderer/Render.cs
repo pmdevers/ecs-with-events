@@ -13,10 +13,12 @@
         {
         }
 
-        public static void Submit(ShaderProgram shader, VertexArray vertexArray)
+        public static void Submit(ShaderProgram shader, VertexArray vertexArray, Matrix4 transform)
         {
             shader.Bind();
-            shader.UploadUniformMatrix("v_ViewProjection", _viewProjectionMatrix);
+            shader.UploadUniformMatrix("u_ViewProjection", _viewProjectionMatrix);
+            shader.UploadUniformMatrix("u_Transform", transform);
+
             vertexArray.Bind();
             RenderCommand.DrawIndexed(vertexArray);
         }

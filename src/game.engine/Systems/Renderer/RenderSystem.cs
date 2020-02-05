@@ -1,6 +1,8 @@
-﻿using Game.Engine.Renderer;
+﻿using Game.Engine.EntityComponentSystem;
+using Game.Engine.Renderer;
 using Game.Engine.Systems.Camera;
 using Game.Engine.Systems.Renderer;
+using Game.Engine.Systems.Transform;
 using System;
 using System.Linq;
 
@@ -29,7 +31,8 @@ namespace Game.Engine.Systems
 
             foreach (var c in components)
             {
-                Render.Submit(c.Shader, c.VertexArray);
+                var transform = c.Record.GetComponent<TransformComponent>()?.Transform ?? Matrix4.Identity();
+                Render.Submit(c.ShaderProgram, c.VertexArray, transform);
             }
 
             Render.EndScene();

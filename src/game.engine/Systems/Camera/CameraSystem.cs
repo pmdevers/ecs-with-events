@@ -1,5 +1,5 @@
 ﻿using Game.Engine.EntityComponentSystem;
-using Game.Engine.Systems.Position;
+using Game.Engine.Systems.Transform;
 using System;
 using System.Linq;
 
@@ -10,7 +10,7 @@ namespace Game.Engine.Systems.Camera
         public override void Update(GameTime gameTime)
         {
             var camera = Registery.GetComponentsOf<CameraComponent>().FirstOrDefault();
-            var position = camera.Record.GetComponent<PositionComponent>();
+            var position = camera.Record.GetComponent<TransformComponent>();
 
             switch (camera.CameraType)
             {

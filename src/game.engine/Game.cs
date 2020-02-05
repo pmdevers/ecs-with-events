@@ -5,6 +5,7 @@ using Game.Engine.Graphics;
 using Game.Engine.Input;
 using Game.Engine.Systems;
 using Game.Engine.Systems.Camera;
+using Game.Engine.Systems.Transform;
 using System;
 
 namespace Game.Engine
@@ -23,10 +24,12 @@ namespace Game.Engine
             EntityLoader = new EntityLoader(EntityRegistery);
             Window = Window.Create(1280, 720, "Game.Engine");
             Window.Init();
-            Window.EnableVsync(true);
+            Window.EnableVsync(false);
             Input = InputManager.Create();
 
+            Registery.Register(new TransformSystem());
             Registery.Register(new CameraSystem());
+
             Registery.Register(new RenderSystem());
 
             EventManager.RegisterListener<CloseWindowEvent>(WindowClosed);

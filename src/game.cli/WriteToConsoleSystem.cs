@@ -6,7 +6,7 @@ using Game.Engine.Events;
 using Game.Engine.EventSystem;
 using Game.Engine.Input;
 using Game.Engine.Systems;
-using Game.Engine.Systems.Position;
+using Game.Engine.Systems.Transform;
 
 namespace Game.Cli
 {
@@ -25,7 +25,9 @@ namespace Game.Cli
 
         public override void Update(GameTime gameTime)
         {
-            var position = Registery.FindByName("Camera").GetComponent<PositionComponent>();
+            //Console.WriteLine("Delta time: {0}s {1}ms", gameTime.GetSeconds(), gameTime.GetMilliseconds());
+
+            var position = Registery.FindByName("Camera").GetComponent<TransformComponent>();
             if (InputManager.IsKeyPressed(KeyCode.A))
             {
                 position.X -= 0.1f * (float)gameTime;
@@ -51,6 +53,26 @@ namespace Game.Cli
             else if (InputManager.IsKeyPressed(KeyCode.Equal))
             {
                 position.Z -= 0.1f * (float)gameTime;
+            }
+
+            var square = Registery.FindByName("Square").GetComponent<TransformComponent>();
+
+            if (InputManager.IsKeyPressed(KeyCode.J))
+            {
+                square.X -= 0.5f * (float)gameTime;
+            }
+            else if (InputManager.IsKeyPressed(KeyCode.L))
+            {
+                square.X += 0.5f * (float)gameTime;
+            }
+
+            if (InputManager.IsKeyPressed(KeyCode.I))
+            {
+                square.Y += 0.5f * (float)gameTime;
+            }
+            else if (InputManager.IsKeyPressed(KeyCode.K))
+            {
+                square.Y -= 0.5f * (float)gameTime;
             }
         }
     }
