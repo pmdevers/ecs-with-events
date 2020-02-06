@@ -39,6 +39,9 @@ namespace Game.Glfw
         public static glUniformMatrix4fv UniformMatrix4Fv;
         public static glGetUniformLocation GetUniformLocation;
 
+        public static glUniform4f Uniform4f;
+        public static glUniform4fv Uniform4fv;
+
         private static T GetMethod<T>()
         {
             var funcPtr = GLFW.GetProcAddress(typeof(T).Name);
@@ -67,7 +70,6 @@ namespace Game.Glfw
             Clear = GetMethod<glClear>();
             GetString = GetMethod<glGetString>();
 
-
             CreateShader = GetMethod<glCreateShader>();
             ShaderSource = GetMethod<glShaderSource>();
             CompileShader = GetMethod<glCompileShader>();
@@ -84,7 +86,9 @@ namespace Game.Glfw
             UseProgram = GetMethod<glUseProgram>();
             UniformMatrix4Fv = GetMethod<glUniformMatrix4fv>();
             GetUniformLocation = GetMethod<glGetUniformLocation>();
+
+            Uniform4f = GetMethod<glUniform4f>();
+            Uniform4fv = GetMethod<glUniform4fv>();
         }
-        
     }
 }

@@ -18,6 +18,7 @@
             shader.Bind();
             shader.UploadUniformMatrix("u_ViewProjection", _viewProjectionMatrix);
             shader.UploadUniformMatrix("u_Transform", transform);
+            shader.UploadUniformFloat4("u_color", new Vector4(1.0f));
 
             vertexArray.Bind();
             RenderCommand.DrawIndexed(vertexArray);

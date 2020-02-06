@@ -63,6 +63,8 @@ namespace Game.Engine.Renderer
 
         public abstract void UploadUniformMatrix(string name, Matrix4 matrix);
 
+        public abstract void UploadUniformFloat4(string name, Vector4 data);
+
         public abstract void Delete();
 
         public abstract void Bind();

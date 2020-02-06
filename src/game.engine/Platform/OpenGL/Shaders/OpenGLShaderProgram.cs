@@ -91,5 +91,11 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
             var location = GetUniformLocation(_shaderProgramObject, name);
             UniformMatrix4Fv(location, 1, false, matrix.ToArray());
         }
+
+        public override void UploadUniformFloat4(string name, Vector4 values)
+        {
+            var location = GetUniformLocation(_shaderProgramObject, name);
+            Uniform4fv(location, 4, values.ToArray());
+        }
     }
 }

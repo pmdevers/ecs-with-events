@@ -7,20 +7,20 @@ namespace Game.Glfw
 {
     public static partial class GL
     {
-        public const int ARRAY_BUFFER                       = 0x8892;
-        public const int ELEMENT_ARRAY_BUFFER               = 0x8893;
-        public const int STATIC_DRAW                        = 0x88E4;
-        public const uint UNSIGNED_INT                      = 0x1405;
-        public const int FLOAT                              = 0x1406;
+        public const int ARRAY_BUFFER = 0x8892;
+        public const int ELEMENT_ARRAY_BUFFER = 0x8893;
+        public const int STATIC_DRAW = 0x88E4;
+        public const uint UNSIGNED_INT = 0x1405;
+        public const int FLOAT = 0x1406;
 
-        public const int TRIANGLES                          = 0x0004;
-        public const int COLOR_BUFFER_BIT                   = 0x4000;
+        public const int TRIANGLES = 0x0004;
+        public const int COLOR_BUFFER_BIT = 0x4000;
 
-        public const uint VENDOR                         = 0x1F00;
-        public const uint RENDERER                       = 0x1F01;
-        public const uint VERSION                        = 0x1F02;
-        public const uint EXTENSIONS                     = 0x1F03;
-        public const uint SHADING_LANGUAGE_VERSION       = 0x18B8C;
+        public const uint VENDOR = 0x1F00;
+        public const uint RENDERER = 0x1F01;
+        public const uint VERSION = 0x1F02;
+        public const uint EXTENSIONS = 0x1F03;
+        public const uint SHADING_LANGUAGE_VERSION = 0x18B8C;
 
         public const uint FRAGMENT_SHADER = 0x8B30;
         public const uint VERTEX_SHADER = 0x8B31;
@@ -46,50 +46,84 @@ namespace Game.Glfw
         public const uint GEOMETRY_VERTICES_OUT = 0x8DDA;
         public const uint GEOMETRY_INPUT_TYPE = 0x8DDB;
         public const uint GEOMETRY_OUTPUT_TYPE = 0x8DDC;
-        
+
         public const uint COMPILE_STATUS = 0x8B81;
 
         private const string OPENGL_DLL = "opengl32";
 
-        [DllImport(OPENGL_DLL, EntryPoint = "glDrawArrays")] 
+        [DllImport(OPENGL_DLL, EntryPoint = "glDrawArrays")]
         public static extern void DrawArrays(uint mode, int first, int count);
-        
+
         public delegate void glDrawArrays(uint mode, int first, int count);
+
         public delegate void glAttachShader(uint program, uint shader);
+
         public delegate void glCreateBuffers(int n, uint[] buffers);
+
         public delegate void glDeleteBuffers(int n, uint[] buffers);
+
         public delegate void glGenBuffers(int n, uint[] buffers);
+
         public delegate void glBindBuffer(uint target, uint buffer);
+
         public delegate void glBufferData(uint target, int size, IntPtr data, uint usage);
+
         public delegate uint glCreateProgram();
 
         public delegate void glDeleteProgram(uint program);
+
         public delegate void glCreateProgramPipelines(int n, uint[] pipelines);
+
         public delegate void glEnableVertexAttribArray(uint index);
+
         public delegate void glVertexAttribPointer(uint indx, int size, uint type, bool normalized, int stride, IntPtr ptr);
+
         public delegate void glVertexAttribPointerARB(uint index, int size, uint type, bool normalized, int stride, IntPtr pointer);
+
         public delegate void glGenVertexArrays(int n, uint[] arrays);
+
         public delegate void glDeleteVertexArrays(int n, uint[] arrays);
+
         public delegate void glBindVertexArray(uint array);
+
         public delegate void glClearColor(float r, float g, float b, float a);
+
         public delegate void glClear(int mask);
+
         public delegate sbyte glGetString(uint name);
-        public delegate void glGetIntegerv (uint pname, int[] parameters);
+
+        public delegate void glGetIntegerv(uint pname, int[] parameters);
+
         public delegate void glDrawElements(int mode, int count, uint type, IntPtr indices);
+
         public delegate uint glCreateShader(uint type);
+
         public delegate void glShaderSource(uint shader, int count, string[] _strings, int[] length);
+
         public delegate void glCompileShader(uint shader);
+
         public delegate void glGetShaderiv(uint shader, uint pname, int[] _params);
+
         public delegate void glGetShaderInfoLog(uint shader, int maxLength, IntPtr length, StringBuilder infoLog);
+
         public delegate void glDeleteShader(uint shader);
+
         public delegate void glUniformMatrix4fv(int location, int count, bool transpose, float[] value);
+
         public delegate int glGetUniformLocation(uint program, string name);
 
-
         public delegate void glLinkProgram(uint program);
+
         public delegate void glGetProgramiv(uint program, uint pname, int[] _params);
+
         public delegate void glGetProgramInfoLog(uint program, int maxLength, IntPtr length, StringBuilder infoLog);
+
         public delegate void glUseProgram(uint program);
+
         public delegate void glDetachShader(uint program, uint shader);
+
+        public delegate void glUniform4f(int location, float v0, float v1, float v2, float v3);
+
+        public delegate void glUniform4fv(int location, int count, float[] values);
     }
 }
