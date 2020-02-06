@@ -201,5 +201,18 @@ namespace Game.Engine
         }
 
         #endregion ToString support
+
+        #region Helper Methods
+
+        public static Vector3 Forward => new Vector3(0f, 0f, 1.0f);
+        public static Vector3 Backward => new Vector3(0f, 0f, -1.0f);
+
+        public static Vector3 Up => new Vector3(0.0f, 1.0f, 0.0f);
+        public static Vector3 Down => new Vector3(0.0f, -1.0f, 0.0f);
+
+        public static Vector3 Left => new Vector3(1.0f, 0.0f, 0.0f);
+        public static Vector3 Right => new Vector3(-1.0f, 0.0f, 0.0f);
+
+        #endregion Helper Methods
     }
 }

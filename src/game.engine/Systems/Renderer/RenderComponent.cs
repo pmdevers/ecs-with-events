@@ -27,18 +27,18 @@ namespace Game.Engine.Systems.Renderer
         }
 
         public string Shader { get; set; }
-        public float[] Verteces { get; set; }
-        public int[] Indecies { get; set; }
+        public float[] Vertices { get; set; }
+        public int[] Indices { get; set; }
         public Dictionary<string, ShaderDataType> BufferLayout { get; set; } = new Dictionary<string, ShaderDataType>();
 
         private VertexArray Init()
         {
             var va = VertexArray.Create();
-            var vb = VertexBuffer.Create(Verteces);
+            var vb = VertexBuffer.Create(Vertices);
 
             vb.BufferLayout = new BufferLayout(BufferLayout);
             va.AddVertexBuffer(vb);
-            va.SetIndexBuffer(IndexBuffer.Create(Indecies));
+            va.SetIndexBuffer(IndexBuffer.Create(Indices));
             return va;
         }
     }

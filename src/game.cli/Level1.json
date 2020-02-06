@@ -22,7 +22,7 @@
       },
       "Render": {
         "Shader": "assets/shaders/shader1.glsl",
-        "Verteces": [
+        "Vertices": [
           -0.75,
           -0.75,
           0.0,
@@ -39,7 +39,7 @@
         "BufferLayout": {
           "a_Position": "Float3"
         },
-        "Indecies": [ 0, 1, 2, 2, 3, 0 ]
+        "Indices": [ 0, 1, 2, 2, 3, 0 ]
       }
     }
   },
@@ -54,7 +54,7 @@
       },
       "Render": {
         "Shader": "assets/shaders/Shader2.glsl",
-        "Verteces": [
+        "Vertices": [
           -0.5,
           -0.5,
           0.0,
@@ -81,7 +81,7 @@
           "a_Position": 3,
           "a_Color": 4
         },
-        "Indecies": [ 0, 1, 2 ]
+        "Indices": [ 0, 1, 2 ]
       }
     }
   }

@@ -25,38 +25,38 @@ namespace Game.Cli
 
         public override void Update(GameTime gameTime)
         {
-            Console.WriteLine("Delta time: {0}s {1}ms", gameTime.GetSeconds(), gameTime.GetMilliseconds());
+            //Console.WriteLine("Delta time: {0}s {1}ms", gameTime.GetSeconds(), gameTime.GetMilliseconds());
 
             var position = Registery.FindByName("Camera").GetComponent<TransformComponent>();
             position.Velocity = new Vector3(0.0f);
+            var speed = 0.5f;
 
             if (InputManager.IsKeyPressed(KeyCode.A))
             {
-                position.Velocity += new Vector3(0.5f, 0.0f, 0.0f);
+                position.Velocity += speed * Vector3.Right;
             }
             else if (InputManager.IsKeyPressed(KeyCode.D))
             {
-                position.Velocity -= new Vector3(0.5f, 0.0f, 0.0f);
+                position.Velocity += speed * Vector3.Left;
             }
 
             if (InputManager.IsKeyPressed(KeyCode.W))
             {
-                position.Velocity += new Vector3(0.0f, 0.5f, 0.0f);
+                position.Velocity += speed * Vector3.Up;
             }
             else if (InputManager.IsKeyPressed(KeyCode.S))
             {
-                position.Velocity -= new Vector3(0.0f, 0.5f, 0.0f);
+                position.Velocity += speed * Vector3.Down;
             }
 
-            if (InputManager.IsKeyPressed(KeyCode.Minus))
+            if (InputManager.IsKeyPressed(KeyCode.Q))
             {
-                position.Velocity += new Vector3(0.0f, 0.0f, 0.5f);
+                position.Rotation -= speed;
             }
-            else if (InputManager.IsKeyPressed(KeyCode.Equal))
+            else if (InputManager.IsKeyPressed(KeyCode.E))
             {
-                position.Velocity -= new Vector3(0.0f, 0.0f, 0.5f);
+                position.Rotation += speed;
             }
-
         }
     }
 }
