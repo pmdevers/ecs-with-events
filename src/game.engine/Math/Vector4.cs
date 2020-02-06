@@ -164,11 +164,35 @@ namespace Game.Engine
 
         #endregion Comparision
 
+        public static Vector4 Parse(string vector4string)
+        {
+            var startChar = 1;
+            var endChar = vector4string.IndexOf(",");
+            var lastEnd = endChar;
+            var x = float.Parse(vector4string.Substring(startChar, endChar - 1));
+            //get second number (y)
+            startChar = lastEnd + 1;
+            endChar = vector4string.IndexOf(",", lastEnd);
+            lastEnd = endChar;
+            var y = float.Parse(vector4string.Substring(startChar, endChar));
+            //get third number (z)
+            startChar = lastEnd + 1;
+            endChar = vector4string.IndexOf(",", lastEnd);
+            lastEnd = endChar;
+            var z = float.Parse(vector4string.Substring(startChar, endChar));
+            //get fourth number (w)
+            startChar = lastEnd + 1;
+            endChar = vector4string.IndexOf(",", lastEnd);
+            var w = float.Parse(vector4string.Substring(startChar, endChar));
+            //pass back a vector4 type
+            return new Vector4(x, y, z, w);
+        }
+
         #region ToString support
 
         public override string ToString()
         {
-            return String.Format("[{0}, {1}, {2}, {3}]", x, y, z, w);
+            return $"{{{x}, {y}, {z}, {w}}}";
         }
 
         #endregion ToString support

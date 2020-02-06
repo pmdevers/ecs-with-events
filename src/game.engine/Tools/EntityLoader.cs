@@ -1,4 +1,5 @@
 ﻿using Game.Engine.EntityComponentSystem;
+using Game.Engine.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace Game.Engine
         {
             _options = new JsonSerializerOptions();
             _options.Converters.Add(new JsonStringEnumConverter());
+            _options.Converters.Add(new VectorConverter());
 
             var type = typeof(IComponent);
             _cachedTypes = AppDomain.CurrentDomain.GetAssemblies()
@@ -46,7 +48,7 @@ namespace Game.Engine
                         var component = (IComponent)JsonSerializer.Deserialize(c.Value.ToString(), _cachedTypes[c.Key], _options);
                         entity.AddComponent(component);
                     }
-                }    
+                }
             }
         }
 

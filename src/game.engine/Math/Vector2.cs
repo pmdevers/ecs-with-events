@@ -155,11 +155,27 @@ namespace Game.Engine
 
         #endregion Comparision
 
+        public static Vector2 Parse(string vector2string)
+        {
+            var startChar = 1;
+            //get first number (z)
+            var endChar = vector2string.IndexOf(",");
+            var lastEnd = endChar;
+            var x = float.Parse(vector2string.Substring(startChar, endChar - 1));
+            //get second number (y)
+            startChar = lastEnd + 1;
+            endChar = vector2string.IndexOf(",", lastEnd);
+            var y = float.Parse(vector2string.Substring(startChar, endChar));
+
+            //pass back a vector2 type
+            return new Vector2(x, y);
+        }
+
         #region ToString support
 
         public override string ToString()
         {
-            return String.Format("[{0}, {1}]", x, y);
+            return $"{{{x}, {y}}}";
         }
 
         #endregion ToString support

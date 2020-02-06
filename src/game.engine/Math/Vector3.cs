@@ -10,7 +10,7 @@ namespace Game.Engine
         public float x;
         public float y;
         public float z;
-        
+
         public float X
         {
             get => x;
@@ -178,7 +178,26 @@ namespace Game.Engine
 
         public override string ToString()
         {
-            return String.Format("[{0}, {1}, {2}]", x, y, z);
+            return $"{{{x}, {y}, {z}}}";
+        }
+
+        public static Vector3 Parse(string vector3string)
+        {
+            var startChar = 1;
+            var endChar = vector3string.IndexOf(",");
+            var lastEnd = endChar;
+            var x = float.Parse(vector3string.Substring(startChar, endChar - 1));
+            //get second number (y)
+            startChar = lastEnd + 1;
+            endChar = vector3string.IndexOf(",", lastEnd);
+            lastEnd = endChar;
+            var y = float.Parse(vector3string.Substring(startChar, endChar));
+            //get third number (z)
+            startChar = lastEnd + 1;
+            endChar = vector3string.IndexOf(",", lastEnd);
+            var z = float.Parse(vector3string.Substring(startChar, endChar));
+            //pass back a vector3 type
+            return new Vector3(x, y, z);
         }
 
         #endregion ToString support

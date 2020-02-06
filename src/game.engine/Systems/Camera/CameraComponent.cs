@@ -9,16 +9,13 @@
     {
         public CameraType CameraType { get; set; }
 
-        public float Left { get; set; }
-        public float Right { get; set; }
-        public float Top { get; set; }
-        public float Bottom { get; set; }
-
-        public Vector3 Position { get; set; }
-        public float Rotation { get; set; }
+        public float Left { get; set; } = 0f;
+        public float Right { get; set; } = 0f;
+        public float Top { get; set; } = 0f;
+        public float Bottom { get; set; } = 0f;
 
         public Matrix4 ViewMatrix { get; set; }
-        public Matrix4 ProjectionMatrix { get; internal set; }
-        public Matrix4 ViewProjectionMatrix { get; internal set; }
+        public Matrix4 ProjectionMatrix { get; set; }
+        public Matrix4 ViewProjectionMatrix { get; set; }
     }
 }
