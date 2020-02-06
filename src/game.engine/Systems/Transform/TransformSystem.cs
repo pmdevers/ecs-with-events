@@ -11,6 +11,7 @@ namespace Game.Engine.Systems.Transform
             var components = Registery.GetComponentsOf<TransformComponent>();
             foreach (var c in components)
             {
+                c.Position += c.Velocity * (float)gameTime;
                 var transform = Math1.Translate(Matrix4.Identity(), c.Position);
                 var scale = Math1.Scale(Matrix4.Identity(), new Vector3(c.Scale));
 

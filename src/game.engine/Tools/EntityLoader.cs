@@ -32,7 +32,25 @@ namespace Game.Engine
             _registery = registery;
         }
 
-        public void LoadJson(string json)
+        public void LoadLevel(string json)
+        {
+            var obj = JsonSerializer.Deserialize<Entity[]>(json, _options);
+            foreach (var obj1 in obj)
+            {
+                var entity = _registery.Create(obj1.Id);
+
+                foreach (var c in obj1.Components)
+                {
+                    if (_cachedTypes.ContainsKey(c.Key))
+                    {
+                        var component = (IComponent)JsonSerializer.Deserialize(c.Value.ToString(), _cachedTypes[c.Key], _options);
+                        entity.AddComponent(component);
+                    }
+                }    
+            }
+        }
+
+        public void LoadEntityJson(string json)
         {
             var obj = JsonSerializer.Deserialize<Entity>(json, _options);
             var entity = _registery.Create(obj.Id);

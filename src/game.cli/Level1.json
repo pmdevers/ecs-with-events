@@ -1,0 +1,91 @@
+[
+  {
+    "Id": "Camera",
+    "Components": {
+      "Transform": {
+        "Rotation": 0
+      },
+      "Camera": {
+        "Left": -1.6,
+        "Right": 1.6,
+        "Bottom": -0.9,
+        "Top": 0.9
+      }
+    }
+  },
+  {
+    "Id": "Square",
+    "Components": {
+      "Transform": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "Scale": 0.5
+      },
+      "Render": {
+        "Shader": "assets/shaders/shader1.glsl",
+        "Verteces": [
+          -0.75,
+          -0.75,
+          0.0,
+          0.75,
+          -0.75,
+          0.0,
+          0.75,
+          0.75,
+          0.0,
+          -0.75,
+          0.75,
+          0.0
+        ],
+        "BufferLayout": {
+          "a_Position": "Float3"
+        },
+        "Indecies": [ 0, 1, 2, 2, 3, 0 ]
+      }
+    }
+  },
+  {
+    "Id": "Triangle",
+    "Components": {
+      "Transform": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0,
+        "Scale": 0.1
+
+      },
+      "Render": {
+        "Shader": "assets/shaders/Shader2.glsl",
+        "Verteces": [
+          -0.5,
+          -0.5,
+          0.0,
+          0.8,
+          0.2,
+          0.8,
+          1.0,
+          0.5,
+          -0.5,
+          0.0,
+          0.2,
+          0.8,
+          0.8,
+          1.0,
+          0.0,
+          0.5,
+          0.0,
+          0.8,
+          0.8,
+          0.2,
+          1.0
+        ],
+        "BufferLayout": {
+          "a_Position": 3,
+          "a_Color": 4
+        },
+        "Indecies": [ 0, 1, 2 ]
+      }
+    }
+  }
+]

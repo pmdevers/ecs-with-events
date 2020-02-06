@@ -4,7 +4,8 @@
     "Transform": {
       "X": 0,
       "Y": 0,
-      "Z": 0
+      "Z": 0,
+      "Rotation":  0 
     },
     "Camera": {
       "Left": -1.6,

@@ -22,10 +22,11 @@ namespace Game.Cli
             var levensloop = new Engine.Game();
 
             levensloop.Registery.Register(new WriteToConsoleSystem());
+            levensloop.EntityLoader.LoadLevel(File.ReadAllText("Level1.json"));
 
-            levensloop.EntityLoader.LoadJson(File.ReadAllText("camera.json"));
-            levensloop.EntityLoader.LoadJson(File.ReadAllText("square.json"));
-            levensloop.EntityLoader.LoadJson(File.ReadAllText("triangle.json"));
+            //levensloop.EntityLoader.LoadJson(File.ReadAllText("camera.json"));
+            //levensloop.EntityLoader.LoadJson(File.ReadAllText("square.json"));
+            //levensloop.EntityLoader.LoadJson(File.ReadAllText("triangle.json"));
 
             levensloop.Run();
 

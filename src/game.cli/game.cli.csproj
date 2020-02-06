@@ -20,6 +20,9 @@
     <None Update="camera.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Level1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="triangle.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

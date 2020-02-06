@@ -10,6 +10,12 @@ namespace Game.Engine
         public float x;
         public float y;
         public float z;
+        
+        public float X
+        {
+            get => x;
+            set => x = value;
+        }
 
         public float this[int index]
         {
