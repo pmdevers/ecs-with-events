@@ -181,21 +181,21 @@ namespace Game.Engine
             return $"{{{x}, {y}, {z}}}";
         }
 
-        public static Vector3 Parse(string vector3string)
+        public static Vector3 Parse(string s)
         {
             var startChar = 1;
-            var endChar = vector3string.IndexOf(",");
+            var endChar = s.IndexOf(",");
             var lastEnd = endChar;
-            var x = float.Parse(vector3string.Substring(startChar, endChar - 1));
+            var x = float.Parse(s.Substring(startChar, endChar - 1));
             //get second number (y)
             startChar = lastEnd + 1;
-            endChar = vector3string.IndexOf(",", lastEnd);
+            endChar = s.IndexOf(",", lastEnd);
             lastEnd = endChar;
-            var y = float.Parse(vector3string.Substring(startChar, endChar));
+            var y = float.Parse(s.Substring(startChar, endChar));
             //get third number (z)
             startChar = lastEnd + 1;
-            endChar = vector3string.IndexOf(",", lastEnd);
-            var z = float.Parse(vector3string.Substring(startChar, endChar));
+            endChar = s.IndexOf(",", lastEnd);
+            var z = float.Parse(s.Substring(startChar, endChar));
             //pass back a vector3 type
             return new Vector3(x, y, z);
         }

@@ -155,17 +155,17 @@ namespace Game.Engine
 
         #endregion Comparision
 
-        public static Vector2 Parse(string vector2string)
+        public static Vector2 Parse(string s)
         {
             var startChar = 1;
             //get first number (z)
-            var endChar = vector2string.IndexOf(",");
+            var endChar = s.IndexOf(",");
             var lastEnd = endChar;
-            var x = float.Parse(vector2string.Substring(startChar, endChar - 1));
+            var x = float.Parse(s.Substring(startChar, endChar - 1));
             //get second number (y)
             startChar = lastEnd + 1;
-            endChar = vector2string.IndexOf(",", lastEnd);
-            var y = float.Parse(vector2string.Substring(startChar, endChar));
+            endChar = s.IndexOf(",", lastEnd);
+            var y = float.Parse(s.Substring(startChar, endChar));
 
             //pass back a vector2 type
             return new Vector2(x, y);

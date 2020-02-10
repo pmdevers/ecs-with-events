@@ -8,6 +8,8 @@ using Game.Engine.Systems.Camera;
 using Game.Engine.Systems.Transform;
 using System;
 
+using Game.Engine.Gui;
+
 namespace Game.Engine
 {
     public class Game
@@ -26,6 +28,7 @@ namespace Game.Engine
             Window.Init();
             Window.EnableVsync(false);
             Input = InputManager.Create();
+            UIContext = UIContext.Create(Window);
 
             Registery.Register(new TransformSystem());
             Registery.Register(new CameraSystem());
@@ -40,6 +43,7 @@ namespace Game.Engine
         public EntityLoader EntityLoader { get; }
         public Window Window { get; }
         public InputManager Input { get; }
+        public UIContext UIContext { get; }
 
         public static Game Instance { get; private set; }
 
@@ -85,6 +89,7 @@ namespace Game.Engine
                         s.Dispose();
                 }
 
+                UIContext.Draw();
                 Window.Update();
             }
         }

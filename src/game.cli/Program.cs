@@ -5,6 +5,7 @@ using System.IO;
 using System.Text.Json;
 
 using Game.Engine.Graphics;
+using Game.Engine.Gui;
 
 namespace Game.Cli
 {
@@ -21,6 +22,9 @@ namespace Game.Cli
         {
             var levensloop = new Engine.Game();
 
+            var label = new Label(levensloop.UIContext, "Text", "Arial", 15);
+
+            
             levensloop.Registery.Register(new WriteToConsoleSystem());
             levensloop.EntityLoader.LoadLevel(File.ReadAllText("Level1.json"));
 

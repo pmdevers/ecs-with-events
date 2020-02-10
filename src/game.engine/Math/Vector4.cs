@@ -164,26 +164,26 @@ namespace Game.Engine
 
         #endregion Comparision
 
-        public static Vector4 Parse(string vector4string)
+        public static Vector4 Parse(string s)
         {
             var startChar = 1;
-            var endChar = vector4string.IndexOf(",");
+            var endChar = s.IndexOf(",");
             var lastEnd = endChar;
-            var x = float.Parse(vector4string.Substring(startChar, endChar - 1));
+            var x = float.Parse(s.Substring(startChar, endChar - 1));
             //get second number (y)
             startChar = lastEnd + 1;
-            endChar = vector4string.IndexOf(",", lastEnd);
+            endChar = s.IndexOf(",", lastEnd);
             lastEnd = endChar;
-            var y = float.Parse(vector4string.Substring(startChar, endChar));
+            var y = float.Parse(s.Substring(startChar, endChar));
             //get third number (z)
             startChar = lastEnd + 1;
-            endChar = vector4string.IndexOf(",", lastEnd);
+            endChar = s.IndexOf(",", lastEnd);
             lastEnd = endChar;
-            var z = float.Parse(vector4string.Substring(startChar, endChar));
+            var z = float.Parse(s.Substring(startChar, endChar));
             //get fourth number (w)
             startChar = lastEnd + 1;
-            endChar = vector4string.IndexOf(",", lastEnd);
-            var w = float.Parse(vector4string.Substring(startChar, endChar));
+            endChar = s.IndexOf(",", lastEnd);
+            var w = float.Parse(s.Substring(startChar, endChar));
             //pass back a vector4 type
             return new Vector4(x, y, z, w);
         }

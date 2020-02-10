@@ -16,6 +16,9 @@ namespace Game.Cli
         {
             Engine.Game.EventManager.RegisterListener<MouseButtonPressedEvent>(OutputEvent);
             Engine.Game.EventManager.RegisterListener<KeyPressedEvent>(OutputEvent);
+
+
+
         }
 
         private void OutputEvent(Event e)
