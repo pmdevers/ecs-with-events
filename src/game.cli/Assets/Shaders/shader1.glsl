@@ -18,11 +18,11 @@ void main() {
 
 #version 430
  
-layout(location = 0) out vec4 color;
+uniform vec4 u_Color;
 
-in vec4 v_color;
+uniform vec4 u_LightDirection;
 
 void main() 
 { 
-    color = vec4(0.2, 0.3, 0.8, 1.0); 
+    color = u_Color; 
 }

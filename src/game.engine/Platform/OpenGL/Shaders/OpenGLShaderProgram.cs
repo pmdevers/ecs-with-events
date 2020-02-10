@@ -9,7 +9,6 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
 {
     public class OpenGLShaderProgram : ShaderProgram
     {
-        private uint _shaderProgramObject;
         private readonly OpenGLShader _vertexShader;
         private readonly OpenGLShader _fragmentShader;
 
@@ -19,10 +18,10 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
             _vertexShader = new OpenGLShader(VERTEX_SHADER, vertexShaderSource);
             _fragmentShader = new OpenGLShader(FRAGMENT_SHADER, fragmentShaderSource);
 
-            _shaderProgramObject = CreateProgram();
+            ShaderProgramObject = CreateProgram();
 
-            AttachShader(_shaderProgramObject, _vertexShader.ShaderObject);
-            AttachShader(_shaderProgramObject, _fragmentShader.ShaderObject);
+            AttachShader(ShaderProgramObject, _vertexShader.ShaderObject);
+            AttachShader(ShaderProgramObject, _fragmentShader.ShaderObject);
 
             if (attributeLocations != null)
             {
@@ -32,11 +31,11 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
                 }
             }
 
-            LinkProgram(_shaderProgramObject);
+            LinkProgram(ShaderProgramObject);
 
             if (!GetLinkStatus())
             {
-                Console.WriteLine($"Failed to compile program with ID {_shaderProgramObject}.");
+                Console.WriteLine($"Failed to compile program with ID {ShaderProgramObject}.");
                 Console.WriteLine(GetInfoLog());
             }
 
@@ -45,18 +44,18 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
 
         public override void Delete()
         {
-            DetachShader(_shaderProgramObject, _vertexShader.ShaderObject);
-            DetachShader(_shaderProgramObject, _fragmentShader.ShaderObject);
+            DetachShader(ShaderProgramObject, _vertexShader.ShaderObject);
+            DetachShader(ShaderProgramObject, _fragmentShader.ShaderObject);
             _vertexShader.Delete();
             _fragmentShader.Delete();
 
-            DeleteProgram(_shaderProgramObject);
-            _shaderProgramObject = 0;
+            DeleteProgram(ShaderProgramObject);
+            ShaderProgramObject = 0;
         }
 
         public override void Bind()
         {
-            UseProgram(_shaderProgramObject);
+            UseProgram(ShaderProgramObject);
         }
 
         public override void Unbind()
@@ -64,37 +63,37 @@ namespace Game.Engine.Graphics.OpenGL.Shaders
             UseProgram(0);
         }
 
-        public uint ShaderProgramObject => _shaderProgramObject;
+        public uint ShaderProgramObject { get; private set; }
 
         public bool GetLinkStatus()
         {
             var p = new[] { 0 };
-            GetProgramiv(_shaderProgramObject, LINK_STATUS, p);
+            GetProgramiv(ShaderProgramObject, LINK_STATUS, p);
             return p[0] == 1;
         }
 
         public string GetInfoLog()
         {
             var infoLenght = new[] { 0 };
-            GetProgramiv(_shaderProgramObject, INFO_LOG_LENGTH, infoLenght);
+            GetProgramiv(ShaderProgramObject, INFO_LOG_LENGTH, infoLenght);
 
             int buffSize = infoLenght[0];
 
             var info = new StringBuilder(buffSize);
-            GetProgramInfoLog(_shaderProgramObject, buffSize, IntPtr.Zero, info);
+            GetProgramInfoLog(ShaderProgramObject, buffSize, IntPtr.Zero, info);
 
             return info.ToString();
         }
 
         public override void UploadUniformMatrix(string name, Matrix4 matrix)
         {
-            var location = GetUniformLocation(_shaderProgramObject, name);
+            var location = GetUniformLocation(ShaderProgramObject, name);
             UniformMatrix4Fv(location, 1, false, matrix.ToArray());
         }
 
         public override void UploadUniformFloat4(string name, Vector4 values)
         {
-            var location = GetUniformLocation(_shaderProgramObject, name);
+            var location = GetUniformLocation(ShaderProgramObject, name);
             Uniform4fv(location, 4, values.ToArray());
         }
     }
