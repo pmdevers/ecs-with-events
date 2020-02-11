@@ -183,25 +183,25 @@ namespace Game.Engine
         /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         public static Matrix4 PickMatrix(Vector2 center, Vector2 delta, Vector4 viewport)
         {
-            if (delta.x <= 0 || delta.y <= 0)
+            if (delta.X <= 0 || delta.Y <= 0)
                 throw new ArgumentOutOfRangeException();
             var Result = new Matrix4(1.0f);
 
-            if (!(delta.x > (0f) && delta.y > (0f)))
+            if (!(delta.X > (0f) && delta.Y > (0f)))
                 return Result; // Error
 
             Vector3 Temp = new Vector3(
-                ((viewport[2]) - (2f) * (center.x - (viewport[0]))) / delta.x,
-                ((viewport[3]) - (2f) * (center.y - (viewport[1]))) / delta.y,
+                ((viewport[2]) - (2f) * (center.X - (viewport[0]))) / delta.X,
+                ((viewport[3]) - (2f) * (center.Y - (viewport[1]))) / delta.Y,
                 (0f));
 
             // Translate and scale the picked region to the entire window
             Result = Translate(Result, Temp);
-            return Scale(Result, new Vector3((viewport[2]) / delta.x, (viewport[3]) / delta.y, (1)));
+            return Scale(Result, new Vector3((viewport[2]) / delta.X, (viewport[3]) / delta.Y, (1)));
         }
 
         /// <summary>
-        /// Map the specified object coordinates (obj.x, obj.y, obj.z) into window coordinates.
+        /// Map the specified object coordinates (obj.X, obj.Y, obj.z) into window coordinates.
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="model">The model.</param>
@@ -320,7 +320,7 @@ namespace Game.Engine
         }
 
         /// <summary>
-        /// Map the specified window coordinates (win.x, win.y, win.z) into object coordinates.
+        /// Map the specified window coordinates (win.X, win.Y, win.z) into object coordinates.
         /// </summary>
         /// <param name="win">The win.</param>
         /// <param name="model">The model.</param>

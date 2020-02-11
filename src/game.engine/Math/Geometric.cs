@@ -15,7 +15,7 @@ namespace Game.Engine
         public static float Dot(Vector2 x, Vector2 y)
         {
             Vector2 tmp = new Vector2(x * y);
-            return tmp.x + tmp.y;
+            return tmp.X + tmp.Y;
         }
 
         public static float Dot(Vector3 x, Vector3 y)
@@ -32,7 +32,7 @@ namespace Game.Engine
 
         public static Vector2 Normalize(Vector2 v)
         {
-            float sqr = v.x * v.x + v.y * v.y;
+            float sqr = v.X * v.X + v.Y * v.Y;
             return v * (1.0f / (float)Math.Sqrt(sqr));
         }
 

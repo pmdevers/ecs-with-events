@@ -8,6 +8,12 @@ namespace Game.Engine
     /// </summary>
     public struct Matrix2
     {
+        public float M11 => this[0, 0];
+        public float M12 => this[0, 1];
+
+        public float M21 => this[1, 0];
+        public float M22 => this[1, 1];
+        
         #region Construction
 
         /// <summary>

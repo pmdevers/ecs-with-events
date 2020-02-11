@@ -20,16 +20,6 @@ namespace Game.Engine.Gui
         public override void Draw(UIContext ctx)
         {
             base.Draw(ctx);
-
-            // Set things up so that we can render text in
-            // window coordinates
-            beginText();
-
-            // Render the text
-            drawString(0.0, 0.0, "James Madison University");
-
-            // Set things up for normal rendering
-            endText();
         }
     }
 }

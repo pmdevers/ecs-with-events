@@ -170,7 +170,7 @@ namespace Game.Engine
             var endChar = s.IndexOf(",");
             var lastEnd = endChar;
             var x = float.Parse(s.Substring(startChar, endChar - 1));
-            //get second number (y)
+            //get second number (Y)
             startChar = lastEnd + 1;
             endChar = s.IndexOf(",", lastEnd);
             lastEnd = endChar;

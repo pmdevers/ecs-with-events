@@ -34,6 +34,15 @@ namespace Game.Engine.Gui.Fonts.Internal
         }
 
         public byte ReadByte() => *Read(1);
+        public sbyte ReadSByte () => *(sbyte*)Read(1);
+        public short ReadInt16 () => *(short*)Read(sizeof(short));
+        public int ReadInt32 () => *(int*)Read(sizeof(int));
+        public ushort ReadUInt16 () => *(ushort*)Read(sizeof(ushort));
+        public uint ReadUInt32 () => *(uint*)Read(sizeof(uint));
+        public short ReadInt16BE () => (short)htons(ReadUInt16());
+        public int ReadInt32BE () => (int)htonl(ReadUInt32());
+        public ushort ReadUInt16BE () => htons(ReadUInt16());
+        public uint ReadUInt32BE () => htonl(ReadUInt32());
 
         public byte[] ReadBytes(int count)
         {
@@ -96,7 +105,7 @@ namespace Game.Engine.Gui.Fonts.Internal
             {
                 if (count > _maxReadLenght)
                 {
-                    throw new InvalidOperationException("Tried to read more data than max read lenght.")
+                    throw new InvalidOperationException("Tried to read more data than max read lenght.");
                 }
 
                 var need = _readOffset - _writeOffset;

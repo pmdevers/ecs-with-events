@@ -85,7 +85,7 @@ namespace Game.Engine.Gui
         {
             var a = Position;
             var c = Size;
-            return (a.y * b.x - a.x * b.y) * (a.y * c.x - a.x * c.y) < 0;
+            return (a.Y * b.X - a.X * b.Y) * (a.Y * c.X - a.X * c.Y) < 0;
         }
 
         public virtual void Draw(UIContext ctx)

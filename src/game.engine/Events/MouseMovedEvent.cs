@@ -13,7 +13,7 @@
 
         public override string ToString()
         {
-            return $"Mouse moved to x: '{XPos}' y: '{YPos}'.";
+            return $"Mouse moved to X: '{XPos}' Y: '{YPos}'.";
         }
     }
 }

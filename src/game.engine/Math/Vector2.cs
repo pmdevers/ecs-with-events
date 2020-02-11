@@ -7,91 +7,124 @@ namespace Game.Engine
     /// </summary>
     public struct Vector2
     {
-        public float x;
-        public float y;
+        public float X;
+        public float Y;
 
         public float this[int index]
         {
             get
             {
-                if (index == 0) return x;
-                else if (index == 1) return y;
+                if (index == 0) return X;
+                else if (index == 1) return Y;
                 else throw new Exception("Out of range.");
             }
             set
             {
-                if (index == 0) x = value;
-                else if (index == 1) y = value;
+                if (index == 0) X = value;
+                else if (index == 1) Y = value;
                 else throw new Exception("Out of range.");
             }
         }
 
         public Vector2(float s)
         {
-            x = y = s;
+            X = Y = s;
         }
 
         public Vector2(float x, float y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
 
         public Vector2(Vector2 v)
         {
-            this.x = v.x;
-            this.y = v.y;
+            this.X = v.X;
+            this.Y = v.Y;
         }
 
         public Vector2(Vector3 v)
         {
-            this.x = v.x;
-            this.y = v.y;
+            this.X = v.x;
+            this.Y = v.y;
+        }
+        public static Vector2 UnitX => new Vector2(1.0f, 0.0f);
+        public static Vector2 UnitY => new Vector2(0.0f, 1.0f);
+        public static Vector2 Zero => new Vector2(0f);
+
+        public float LengthSquared()
+        {
+            return X * X + Y * Y;
+        }
+
+        public static float Dot(Vector2 value1, Vector2 value2)
+        {
+            return value1.X * value2.X +
+                   value1.Y * value2.Y;
+        }
+
+        public static Vector2 TransformNormal(Vector2 normal, Matrix2 transform)
+        {
+            return new Vector2(
+                normal.X * transform.M11 + normal.X * transform.M21,
+                normal.X * transform.M12 + normal.X * transform.M22);
+        }
+
+        public static Vector2 Normalize(Vector2 value)
+        {
+            
+                float ls = value.X * value.X + value.Y * value.Y;
+                float invNorm = 1.0f / (float)Math.Sqrt((double)ls);
+ 
+                return new Vector2(
+                    value.X * invNorm,
+                    value.Y * invNorm);
+            
         }
 
         public static Vector2 operator +(Vector2 lhs, Vector2 rhs)
         {
-            return new Vector2(lhs.x + rhs.x, lhs.y + rhs.y);
+            return new Vector2(lhs.X + rhs.X, lhs.Y + rhs.Y);
         }
 
         public static Vector2 operator +(Vector2 lhs, float rhs)
         {
-            return new Vector2(lhs.x + rhs, lhs.y + rhs);
+            return new Vector2(lhs.X + rhs, lhs.Y + rhs);
         }
 
         public static Vector2 operator -(Vector2 lhs, Vector2 rhs)
         {
-            return new Vector2(lhs.x - rhs.x, lhs.y - rhs.y);
+            return new Vector2(lhs.X - rhs.X, lhs.Y - rhs.Y);
         }
 
         public static Vector2 operator -(Vector2 lhs, float rhs)
         {
-            return new Vector2(lhs.x - rhs, lhs.y - rhs);
+            return new Vector2(lhs.X - rhs, lhs.Y - rhs);
         }
 
         public static Vector2 operator *(Vector2 self, float s)
         {
-            return new Vector2(self.x * s, self.y * s);
+            return new Vector2(self.X * s, self.Y * s);
         }
 
         public static Vector2 operator *(float lhs, Vector2 rhs)
         {
-            return new Vector2(rhs.x * lhs, rhs.y * lhs);
+            return new Vector2(rhs.X * lhs, rhs.Y * lhs);
         }
 
         public static Vector2 operator *(Vector2 lhs, Vector2 rhs)
         {
-            return new Vector2(rhs.x * lhs.x, rhs.y * lhs.y);
+            return new Vector2(rhs.X * lhs.X, rhs.Y * lhs.Y);
         }
 
         public static Vector2 operator /(Vector2 lhs, float rhs)
         {
-            return new Vector2(lhs.x / rhs, lhs.y / rhs);
+            return new Vector2(lhs.X / rhs, lhs.Y / rhs);
         }
 
         public float[] ToArray()
         {
-            return new[] { x, y };
+            return new[] { X, Y };
         }
 
         #region Comparision
@@ -109,7 +142,7 @@ namespace Game.Engine
             if (obj.GetType() == typeof(Vector2))
             {
                 var vec = (Vector2)obj;
-                if (this.x == vec.x && this.y == vec.y)
+                if (this.X == vec.X && this.Y == vec.Y)
                     return true;
             }
 
@@ -150,7 +183,7 @@ namespace Game.Engine
         /// </returns>
         public override int GetHashCode()
         {
-            return this.x.GetHashCode() ^ this.y.GetHashCode();
+            return this.X.GetHashCode() ^ this.Y.GetHashCode();
         }
 
         #endregion Comparision
@@ -162,7 +195,7 @@ namespace Game.Engine
             var endChar = s.IndexOf(",");
             var lastEnd = endChar;
             var x = float.Parse(s.Substring(startChar, endChar - 1));
-            //get second number (y)
+            //get second number (Y)
             startChar = lastEnd + 1;
             endChar = s.IndexOf(",", lastEnd);
             var y = float.Parse(s.Substring(startChar, endChar));
@@ -175,7 +208,7 @@ namespace Game.Engine
 
         public override string ToString()
         {
-            return $"{{{x}, {y}}}";
+            return $"{{{X}, {Y}}}";
         }
 
         #endregion ToString support
