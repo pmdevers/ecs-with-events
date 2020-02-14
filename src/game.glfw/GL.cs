@@ -42,6 +42,8 @@ namespace Game.Glfw
         public static glUniform4f Uniform4f;
         public static glUniform4fv Uniform4fv;
 
+        public static glTexImage2D TexImage2D;
+
         private static T GetMethod<T>()
         {
             var funcPtr = GLFW.GetProcAddress(typeof(T).Name);
@@ -89,6 +91,8 @@ namespace Game.Glfw
 
             Uniform4f = GetMethod<glUniform4f>();
             Uniform4fv = GetMethod<glUniform4fv>();
+
+            TexImage2D = GetMethod<glTexImage2D>();
         }
     }
 }

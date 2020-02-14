@@ -4,19 +4,29 @@ using System;
 
 namespace Game.Engine.Graphics.OpenGL
 {
-    public class OpenGLRendererAPI : IRenderAPI
+    public class OpenGLRendererAPI : RendererAPI
     {
-        public void Clear()
+        public override void Clear()
         {
             GL.Clear(GL.COLOR_BUFFER_BIT);
         }
 
-        public void DrawIndexed(VertexArray vertexArray)
+        public override void RenderText(string text, float x, float y, float sx, float sy)
+        {
+            foreach (var p in text)
+            {
+                
+                GL.glT
+
+            }
+        }
+
+        public override void DrawIndexed(VertexArray vertexArray)
         {
             GL.DrawElements(GL.TRIANGLES, vertexArray.GetIndexBuffer().GetCount(), GL.UNSIGNED_INT, IntPtr.Zero);
         }
 
-        public void SetClearColor(float red, float green, float blue, float alpha)
+        public override void SetClearColor(float red, float green, float blue, float alpha)
         {
             GL.ClearColor(red, green, blue, alpha);
         }

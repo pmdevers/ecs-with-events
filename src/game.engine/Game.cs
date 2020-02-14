@@ -28,7 +28,7 @@ namespace Game.Engine
             Window.Init();
             Window.EnableVsync(false);
             Input = InputManager.Create();
-            UIContext = UIContext.Create(Window);
+            UI = UIContext.Create(Window);
 
             Registery.Register(new TransformSystem());
             Registery.Register(new CameraSystem());
@@ -43,7 +43,7 @@ namespace Game.Engine
         public EntityLoader EntityLoader { get; }
         public Window Window { get; }
         public InputManager Input { get; }
-        public UIContext UIContext { get; }
+        public UIContext UI { get; }
 
         public static Game Instance { get; private set; }
 
@@ -89,7 +89,7 @@ namespace Game.Engine
                         s.Dispose();
                 }
 
-                UIContext.Draw();
+                UI.Draw();
                 Window.Update();
             }
         }

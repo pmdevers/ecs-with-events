@@ -16,7 +16,7 @@ namespace Game.Engine.Systems
             Camera = new OrthographicCamera(-1.6f, 1.6f, -0.9f, 0.9f);
         }
 
-        public IRenderAPI Renderer { get; private set; }
+        public RendererAPI Renderer { get; private set; }
         public OrthographicCamera Camera { get; private set; }
 
         public override void Update(GameTime gameTime)

@@ -13,7 +13,7 @@ namespace Game.Engine.Renderer
     {
         public static API Api = API.OpenGL;
 
-        public static IRenderAPI GetAPI()
+        public static RendererAPI GetAPI()
         {
             switch (Api)
             {
@@ -25,5 +25,12 @@ namespace Game.Engine.Renderer
 
             throw new NotSupportedException();
         }
+
+        public abstract void SetClearColor(float red, float green, float blue, float alpha);
+
+        public abstract void Clear();
+
+        public abstract void RenderText(string text, float x, float y, float sx, float sy);
+        public abstract void DrawIndexed(VertexArray vertexArray);
     }
 }

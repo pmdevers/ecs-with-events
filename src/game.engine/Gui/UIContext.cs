@@ -11,7 +11,7 @@ namespace Game.Engine.Gui
     {
         public Window Window { get; }
         
-        public UIContext Create(Window window)
+        public static UIContext Create(Window window)
         {
             return new OpenGLUIContext(window);
         }
